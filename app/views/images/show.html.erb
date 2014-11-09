@@ -7,7 +7,7 @@
 
 <p>
   <strong>Description:</strong>
-  <%= @image.description %>
+  <%= simple_format(@image.description) %>
 </p>
 
 <p>
@@ -16,8 +16,11 @@
 </p>
 
 <p>
-  <strong>Rating:</strong>
-  <%= @image.rating %>
+  <img src="<%= @image.url%>">
+</p>
+<p>
+	<strong>Rating:</strong>
+	<%= simple_format("&#9734;" * (@image.rating / 20)) %>
 </p>
 
 <%= link_to 'Edit', edit_image_path(@image) %> |
