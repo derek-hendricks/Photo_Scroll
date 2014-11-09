@@ -24,6 +24,10 @@
   <strong>Complete:</strong>
   <%= @task.complete %>
 </p>
+<p>
+  <b>Time Remaining:</b>
+  <%= distance_of_time_in_words(Date.today, @task.due_date) %>
+</p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>
