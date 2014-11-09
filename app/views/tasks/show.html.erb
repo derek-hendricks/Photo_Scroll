@@ -12,7 +12,7 @@
 
 <p>
   <strong>Duration:</strong>
-  <%= @task.duration %>
+  <%= number_with_precision(@task.duration / 60.0, :precision => 2) %> hours
 </p>
 
 <p>
