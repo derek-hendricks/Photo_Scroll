@@ -18,6 +18,7 @@
 <p>
   <img src="<%= @image.url%>">
 </p>
+<p>Posted by <%= @image.user.username %> </p>
 <p>
 	<strong>Rating:</strong>
 	<%= simple_format("&#9734;" * (@image.rating / 20)) %>

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :users
-
   get "images/fivestar"
   resources :images
   get "tasks/incomplete"
