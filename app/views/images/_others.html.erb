@@ -1,0 +1,5 @@
+<ul>
+  <% images.each do |image| %>
+    <li><%= link_to_unless_current image.caption, image_path(image) %></li>
+  <% end %>
+</ul>

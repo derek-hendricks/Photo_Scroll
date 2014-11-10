@@ -24,5 +24,10 @@
 	<%= simple_format("&#9734;" * (@image.rating / 20)) %>
 </p>
 
+<% if @image.user != nil %>
+  <h2>Other photos by <%= @image.user.full_name %></h2>
+  <%= render :partial=>"others", :locals=>{:images=>@image.user.images} %>
+<% end %>
+
 <%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>
