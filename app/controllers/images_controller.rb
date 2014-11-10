@@ -7,6 +7,14 @@ class ImagesController < ApplicationController
     @images = Image.all
   end
 
+def fivestar 
+  @images = Image.where(:rating => 80..100)
+  respond_to do |format| 
+    format.html 
+    format.json { render :json => @images }
+  end
+end
+
   # GET /images/1
   # GET /images/1.json
   def show
