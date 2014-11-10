@@ -5,13 +5,17 @@ class ImagesController < ApplicationController
     @images = Image.all
   end
 
-def fivestar 
-  @images = Image.where(:rating => 80..100)
-  respond_to do |format| 
-    format.html 
-    format.json { render :json => @images }
+  def find 
+    @images = Image.all.search_by_caption_and_description(params[:search]) if params[:search].present?
   end
-end
+
+  def fivestar 
+    @images = Image.where(:rating => 80..100)
+    respond_to do |format| 
+      format.html 
+      format.json { render :json => @images }
+    end
+  end
 
   def show
   end

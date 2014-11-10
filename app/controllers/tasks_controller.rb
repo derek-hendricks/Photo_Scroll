@@ -2,15 +2,16 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def search 
-    terms = params[:search].upcase 
-    @tasks = @user.tasks.where(["upper(name) like ? OR upper(description) like ?", "%#{terms}%", "%#{terms}%"]) 
+    terms = params[:search].upcase if params[:search].present?  
+    @tasks = @user.tasks.search_by_name_and_description(terms)
   end
+
   def index
     @tasks = @user.tasks
   end
 
   def incomplete 
-    @tasks = @user.tasks.where(:complete => false)
+    @tasks = @user.tasks.complete_is(false)
     @overdue = @user.tasks.where(["due_date < ? and complete = ?", Date.today, false])
   end
 

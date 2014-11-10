@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :users
   get "images/fivestar"
+  get "images/find"
   resources :images
   get "tasks/incomplete"
   get "tasks/search"

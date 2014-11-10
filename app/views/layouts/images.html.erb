@@ -10,6 +10,12 @@
 <div style="float:right">
 	Signed in as: <strong><%= @user.full_name %></strong>
 </div>
+
+<%= form_tag(images_find_path, :method => "get", id: "search-form") do %>
+	<%= text_field_tag :search, params[:search], placeholder: "Search" %>
+	<%= submit_tag "Search", :name => nil %>
+<% end %>
+
 <div style="display:table-cell; width: 200px;">
 	<h1>Photos</h1>
 	<ul>
