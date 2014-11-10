@@ -2,7 +2,7 @@ class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
   def index
-    @images = Image.all
+    @images = Image.where(['flagged == ? or flagged is null', false])
   end
 
   def find 
@@ -25,6 +25,7 @@ class ImagesController < ApplicationController
   end
 
   def edit
+    @image = Image.find(params[:id])
   end
 
   def create
@@ -42,6 +43,7 @@ class ImagesController < ApplicationController
   end
 
   def update
+    @image = Image.find(params[:id])
     respond_to do |format|
       if @image.update(image_params)
         format.html { redirect_to @image, notice: 'Image was successfully updated.' }
@@ -68,14 +70,14 @@ class ImagesController < ApplicationController
     end
 
     def image_params
-      params.require(:image).permit(:caption, :description, :url, :rating)
+      params.require(:image).permit(:caption, :description, :url, :rating, :flagged)
     end
- before_filter :login
- private
-  def login
-    authenticate_or_request_with_http_basic("The photo pages") do |username, password|
-    @user = User.find_by_username(username)
-    @user != nil && password == @user.password
+   before_filter :login
+   private
+    def login
+      authenticate_or_request_with_http_basic("The photo pages") do |username, password|
+      @user = User.find_by_username(username)
+      @user != nil && password == @user.password
+      end
     end
-  end
 end

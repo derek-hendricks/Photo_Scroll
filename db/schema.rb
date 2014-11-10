@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141110093656) do
+ActiveRecord::Schema.define(version: 20141110094513) do
 
   create_table "images", force: true do |t|
     t.string   "caption"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20141110093656) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.boolean  "flagged"
   end
 
   create_table "tasks", force: true do |t|
