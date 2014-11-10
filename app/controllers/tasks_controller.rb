@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
+  def search 
+    terms = params[:search].upcase 
+    @tasks = @user.tasks.where(["upper(name) like ? OR upper(description) like ?", "%#{terms}%", "%#{terms}%"]) 
+  end
   def index
     @tasks = @user.tasks
   end
@@ -63,12 +67,13 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:name, :description, :duration, :due_date, :complete)
     end
+
     before_filter :login
-  private
-  def login
-    authenticate_or_request_with_http_basic("The task pages") do |username, password|
-      @user = User.find_by_username(username)
-      @user != nil && password == @user.password
-    end
-  end
+    private
+      def login
+        authenticate_or_request_with_http_basic("The task pages") do |username, password|
+          @user = User.find_by_username(username)
+          @user != nil && password == @user.password
+        end
+      end
 end

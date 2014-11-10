@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "images/fivestar"
   resources :images
   get "tasks/incomplete"
+  get "tasks/search"
   resources :tasks
 
   # The priority is based upon order of creation: first created -> highest priority.
