@@ -7,18 +7,21 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div style="display:table-cell; width: 200px;">
-<h1>TASKS</h1>
-<ul>
-<li><%= link_to_unless_current 'All tasks', :tasks %></li>
-<li><%= link_to_unless_current 'Incomplete tasks', :tasks_incomplete %></li>
-<li><%= link_to_unless_current 'New task', :new_task %></li>
-</ul>
-</div>
-<%= yield %>
-<hr>
-<h4>Copyright</h4>
-<p> &#169; Copyright 2014 PhotoScroll Unltd.</p>
-<hr>
+	<div style="float: right">
+		Signed in as: <strong><%= @user.full_name %></strong>
+	</div>
+	<div style="display:table-cell; width: 200px;">
+		<h1>TASKS</h1>
+		<ul>
+			<li><%= link_to_unless_current 'All tasks', :tasks %></li>
+			<li><%= link_to_unless_current 'Incomplete tasks', :tasks_incomplete %></li>
+			<li><%= link_to_unless_current 'New task', :new_task %></li>
+		</ul>
+	</div>
+	<%= yield %>
+	<hr>
+	<h4>Copyright</h4>
+	<p> &#169; Copyright 2014 PhotoScroll Unltd.</p>
+	<hr>
 </body>
 </html>

@@ -79,4 +79,12 @@ end
     def image_params
       params.require(:image).permit(:caption, :description, :url, :rating)
     end
+ before_filter :login
+ private
+  def login
+    authenticate_or_request_with_http_basic("The photo pages") do |username, password|
+    @user = User.find_by_username(username)
+    @user != nil && password == @user.password
+    end
+  end
 end

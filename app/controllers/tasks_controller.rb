@@ -77,9 +77,11 @@ class TasksController < ApplicationController
       params.require(:task).permit(:name, :description, :duration, :due_date, :complete)
     end
     before_filter :login
-    def login
-      authenticate_or_request_with_http_basic("The task pages") do |username, password|
-        username == 'admin' && password == 'kingFish'
-      end
+  private
+  def login
+    authenticate_or_request_with_http_basic("The task pages") do |username, password|
+      @user = User.find_by_username(username)
+      @user != nil && password == @user.password
     end
+  end
 end
