@@ -9,6 +9,7 @@ class TasksController < ApplicationController
 
   def incomplete 
     @tasks = Task.where(:complete => false)
+    @overdue = Task.where(["due_date < ? and complete = ?", Date.today, false])
   end
 
   # GET /tasks/1
