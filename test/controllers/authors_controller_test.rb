@@ -44,6 +44,8 @@ class AuthorsControllerTest < ActionController::TestCase
       delete :destroy, id: @author
     end
 
+ 
+
     assert_redirected_to authors_path
   end
 end

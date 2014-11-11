@@ -13,3 +13,16 @@ two:
   password: MyString
   profile: MyText
   image: MyString
+
+basic_user:
+  full_name: Seymour Papert
+  username: seymour
+  password: turtle1
+  profile: a E W
+
+admin:
+  full_name: Robert Morris
+  username: robm
+  password: tappan
+  profile: b T e 
+  admin: true

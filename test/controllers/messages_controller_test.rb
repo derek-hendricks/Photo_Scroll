@@ -44,6 +44,8 @@ class MessagesControllerTest < ActionController::TestCase
     get :new 
     assert_response :unauthorized
   end
+
+
   
 private
 def login(username, password)

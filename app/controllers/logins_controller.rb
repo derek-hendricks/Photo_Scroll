@@ -6,7 +6,11 @@ class LoginsController < ApplicationController
 	author = Author.where("lower(username) = ?", username.downcase).first
 	if author != nil && (password.casecmp(author.password) == 0)
 		session[:author_id] = author.id
-		redirect_to messages_url
+		if author.admin 
+			redirect_to authors_url 
+		else
+			redirect_to messages_url
+		end
 	else
 		redirect_to login_url, :alert => "Unknown username/password"
 	end
