@@ -2,8 +2,8 @@
 
 one:
   full_name: MyString
-  username: MyString
-  password: MyString
+  username: user1
+  password: password1
   profile: MyText
   image: MyString
 

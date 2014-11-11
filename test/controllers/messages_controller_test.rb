@@ -6,17 +6,20 @@ class MessagesControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
+    login('user1', 'password1')
     get :index
     assert_response :success
     assert_not_nil assigns(:messages)
   end
 
   test "should get new" do
+    login('user1', 'password1')
     get :new
     assert_response :success
   end
 
   test "should create message" do
+    login('user1', 'password1')
     assert_difference('Message.count') do
       post :create, message: { contents: @message.contents }
     end
@@ -25,25 +28,26 @@ class MessagesControllerTest < ActionController::TestCase
   end
 
   test "should show message" do
+    login('user1', 'password1')
     get :show, id: @message
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, id: @message
+  test "username and passwords are case insensitive" do 
+    login('uSeR1', 'pAsswOrd1')
+    get :new 
     assert_response :success
   end
 
-  test "should update message" do
-    patch :update, id: @message, message: { contents: @message.contents }
-    assert_redirected_to message_path(assigns(:message))
+  test "passwords must be correct for a user" do 
+    login('user1', 'not my password')
+    get :new 
+    assert_response :unauthorized
   end
-
-  test "should destroy message" do
-    assert_difference('Message.count', -1) do
-      delete :destroy, id: @message
-    end
-
-    assert_redirected_to messages_path
-  end
+  
+private
+def login(username, password)
+digest = Base64.encode64("#{username}:#{password}")
+@request.env['HTTP_AUTHORIZATION'] = "Basic #{digest}"
+end
 end
