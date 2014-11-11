@@ -1,0 +1,17 @@
+<h1>Latest messages</h1>
+<table>
+<% @messages.reverse.each do |message| %>
+<tr>
+<td>
+<div style="height: 73px; width: 73px; overflow:hidden">
+<% if message.author != nil %>
+<img src="<%= message.author.image %>" width="73"/>
+<% end %>
+</div>
+</td>
+<td><%= message.contents %></td>
+</tr>
+<% end %>
+</table>
+<br />
+<%= link_to 'New Message', new_message_path %>
