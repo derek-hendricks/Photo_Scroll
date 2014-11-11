@@ -9,6 +9,7 @@
 <body>
 <div style="float:right">
 	Signed in as: <span style="font-weight: bold;"><%= @author.full_name %></span>
+	| <%= link_to "Logout", :controller => "logins", :action => "logout" %>
 </div>
 <%= yield %>
 </body>

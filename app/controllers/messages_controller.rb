@@ -60,9 +60,12 @@ class MessagesController < ApplicationController
     end
 
     def login
-      authenticate_or_request_with_http_basic("The admin area") do |username, password|
-      @author = Author.where("lower(username) = ?", username.downcase).first
-      @author != nil && (password.casecmp(@author.password)==0)
+      author_id = session[:author_id]
+      if author_id != nil 
+        @author = Author.find(author_id)
+      else 
+        redirect_to login_url, :alert => "You must login"
+      end
     end
-  end
 end
+

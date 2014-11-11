@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+
+  controller :logins do 
+    get "login" => :form 
+    post "login" => :login 
+    get "logout" => :logout 
+  end
+
   resources :authors
-
   resources :messages
-
   resources :users
   get "images/fivestar"
   get "images/find"
