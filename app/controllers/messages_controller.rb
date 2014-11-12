@@ -15,6 +15,12 @@ class MessagesController < ApplicationController
   def edit
   end
 
+  def favourite
+    message = Message.find(params[:id])
+    @author.favourites << message unless @author.favourites.include? message
+    redirect_to messages_url
+  end
+
   def create
     @message = Message.new(message_params)
     @message.author = @author

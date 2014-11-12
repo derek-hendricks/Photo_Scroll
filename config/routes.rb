@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   end
 
   resources :authors
-  resources :messages
+  resources :messages do 
+    member do 
+      post 'favourite'
+    end
+  end
+
   resources :users
   get "images/fivestar"
   get "images/find"

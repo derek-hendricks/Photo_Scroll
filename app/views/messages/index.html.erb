@@ -9,7 +9,14 @@
 <% end %>
 </div>
 </td>
-<td><%= message.contents %></td>
+<td><%= message.contents %><br/>
+	<div class="favourites">
+		Favourites: <%= message.favourites.size %>
+		<%= form_tag(favourite_message_path(message)) do %>
+			<%= submit_tag "Add as favourite" %>
+		<% end %>
+	</div>
+</td>
 </tr>
 <% end %>
 </table>

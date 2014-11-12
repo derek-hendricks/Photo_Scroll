@@ -14,10 +14,14 @@ class MessageTest < ActiveSupport::TestCase
 		assert_equal(@msg, @derek.favourites[0])
 	end
 	test "more than one author can favourite a message" do 
-		@derek.favourites << @msg
+	@derek.favourites << @msg
     @user_admin.favourites << @msg
     assert_equal(2, @msg.favourites.size)
     assert @msg.favourites.include?(@user_admin)
     assert @msg.favourites.include?(@derek)
+	end
+	test "a favourited message will have the correct author" do 
+		@derek.favourites << @msg 
+		assert_equal(@msg.author, @derek.favourites.first.author)
 	end
 end
