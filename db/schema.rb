@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112001318) do
+ActiveRecord::Schema.define(version: 20141112005456) do
+
+  create_table "author_follows", force: true do |t|
+    t.integer  "author_id"
+    t.integer  "follow_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "authors", force: true do |t|
     t.string   "full_name"
