@@ -6,8 +6,18 @@ Rails.application.routes.draw do
     get "logout" => :logout 
   end
 
-  resources :authors
+  resources :authors do 
+    member do 
+      post 'follow'
+    end
+  end
+  # the follow action is used to follow a specific author. the followed action is used to display all
+  # followed authors, so id isn't included in path. to create a new action to apply to a group
+  # of things, use a collection do..end rather than members do..end
   resources :messages do 
+    collection do 
+      get 'streams/:stream', :action => :streams, :as => "streams"
+    end
     member do 
       post 'favourite'
     end

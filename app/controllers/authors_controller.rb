@@ -48,7 +48,20 @@ class AuthorsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  before_filter :login
+
+  def follow 
+    author_id = session[:author_id]
+    if author_id != nil 
+      logged_in_author = Author.find(author_id)
+      author = Author.find(params[:id])
+      author.followers << logged_in_author unless author.followers.include? logged_in_author 
+      redirect_to messages_url 
+    else 
+      redirect_to login_url, :alert => "You must login"
+    end
+  end
+  before_filter :login, :except => :follow
+  # :except follow so login security won't be run when follow method is called
   private
   
     def set_author

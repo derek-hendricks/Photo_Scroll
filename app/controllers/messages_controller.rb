@@ -2,7 +2,20 @@ class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
   def index
+    @title = "Latest messages"
     @messages = Message.all
+  end
+
+  def streams
+    if params[:stream] == 'favourites'
+      @title = "Favourite messages"
+      @messages = @author.favourites
+    elsif params[:stream] == 'followed'
+      @title = "Followed messages"
+      @messages = @author.followed_messages
+    end
+      # render, otherwise looks for followed.html.erb
+    render :action => :index
   end
 
   def show
@@ -62,7 +75,7 @@ class MessagesController < ApplicationController
     end
 
     def message_params
-      params.require(:message).permit(:contents)
+      params.require(:message).permit(:contents, :stream)
     end
 
     def login

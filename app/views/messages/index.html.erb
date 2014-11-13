@@ -1,4 +1,4 @@
-<h1>Latest messages</h1>
+<h1><%= @title %></h1>
 <table>
 <% @messages.reverse.each do |message| %>
 <tr>
@@ -14,6 +14,13 @@
 		Favourites: <%= message.favourites.size %>
 		<%= form_tag(favourite_message_path(message)) do %>
 			<%= submit_tag "Add as favourite" %>
+		<% end %>
+	</div>
+	<div class="follow">
+		<% if message.author != nil and message.author != @author and not @author.follows.include?(message.author) %>
+			<%= form_tag(follow_author_path(message.author)) do %>
+				<%= submit_tag "Follow author" %>
+			<% end %>
 		<% end %>
 	</div>
 </td>

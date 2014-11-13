@@ -11,6 +11,13 @@
 	Signed in as: <span style="font-weight: bold;"><%= @author.full_name %></span>
 	| <%= link_to "Logout", :controller => "logins", :action => "logout" %>
 </div>
+<div style="float: left">
+	<ul>
+		<li><%= link_to_unless_current "All messages", :controller => "messages", :action => "index" %></li>
+		<li><%= link_to_unless_current "Followed", :controller => "messages", :action => "streams", :stream => "followed" %></li>
+		<li><%= link_to_unless_current "Favourites", :controller => "messages", :action => "streams", :stream => "favourites" %></li>
+	</ul>
+</div>
 <%= yield %>
 </body>
 </html>

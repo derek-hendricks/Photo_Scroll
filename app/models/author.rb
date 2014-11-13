@@ -6,6 +6,10 @@ class Author < ActiveRecord::Base
 	has_many :followers, :through => :follow_authors, :source => :author # 3
 	validates :username, :uniqueness => true
 	validates :username, :password, :full_name, :presence => true
+
+	def followed_messages 
+		Message.followed_by(self.id)
+	end
 end
 
 # each author can have many follows they are following. relationship follows represents the authors an author is
