@@ -4,10 +4,7 @@ class Message < ActiveRecord::Base
 	validates :contents, :length => { :minimum => 3, :maximum => 140 }
 
 	scope :followed_by, -> id {where("author_id IN (SELECT follow_id FROM author_follows WHERE author_id = ?)", id)}
-
-# 	def self.followed_by(id)
-# 		where('author_id IN (SELECT follow_id FROM author_follows WHERE author_id = ?)', id) 
-# end
+    default_scope { order('created_at DESC') }
 
 end
 

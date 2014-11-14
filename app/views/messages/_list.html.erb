@@ -1,0 +1,31 @@
+<% messages.each do |message| %>
+<table>
+	<tr>
+		<td>
+			<div style="height: 73px; width: 73px; overflow: hidden">
+				<% if message.author != nil %>
+					<img src="<%= message.author.image %>" width="73"/>
+				<% end %>
+			</div>
+		</td>
+		<td>
+			<%= message.contents %>
+			<br/>
+			<div class="favorites">
+				Favorites: <%= message.favourites.size %>
+				<%= form_tag(favourite_message_path(message)) do %>
+					<%= submit_tag "Add as favorite" %>
+				<% end %>
+			</div>
+			<div class="follow">
+				<% if message.author != nil and message.author != @author and not @author.follows.include?(message.author) %>
+					<%= form_tag(follow_author_path(message.author)) do %>
+						<%= submit_tag "Follow author" %>
+					<% end %>
+				<% end %>
+			</div>
+	</td>
+</tr>
+
+</table>
+<% end %>

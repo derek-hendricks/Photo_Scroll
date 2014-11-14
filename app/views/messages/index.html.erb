@@ -1,32 +1,9 @@
 <h1><%= @title %></h1>
-<table>
-<% @messages.reverse.each do |message| %>
-<tr>
-<td>
-<div style="height: 73px; width: 73px; overflow:hidden">
-<% if message.author != nil %>
-<img src="<%= message.author.image %>" width="73"/>
+<% if @the_message then %>
+	<%= render 'form' %>
 <% end %>
+<div id="messages">
+	<%= render 'list', :messages => @messages %>
+	
 </div>
-</td>
-<td><%= message.contents %><br/>
-	<div class="favourites">
-		Favourites: <%= message.favourites.size %>
-		<%= form_tag(favourite_message_path(message)) do %>
-			<%= submit_tag "Add as favourite" %>
-		<% end %>
-	</div>
-	<div class="follow">
-		<% if message.author != nil and message.author != @author and not @author.follows.include?(message.author) %>
-			<%= form_tag(follow_author_path(message.author)) do %>
-				<%= submit_tag "Follow author" %>
-			<% end %>
-		<% end %>
-	</div>
-</td>
-</tr>
-<% end %>
-</table>
 <%= will_paginate @messages %>
-<br />
-<%= link_to 'New Message', new_message_path %>

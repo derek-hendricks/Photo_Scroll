@@ -1,0 +1,28 @@
+<table>
+	<tr>
+		<td>
+			<div style="height: 73px; width: 73px; overflow: hidden">
+				<% if @the_message.author != nil %>
+					<img src="<%= @the_message.author.image %>" width="73"/>
+				<% end %>
+			</div>
+		</td>
+		<td>
+			<%= @the_message.contents %>
+			<br/>
+			<div class="favorites">
+				Favorites: <%= @the_message.favourites.size %>
+				<%= form_tag(favourite_message_path(@the_message)) do %>
+					<%= submit_tag "Add as favorite" %>
+				<% end %>
+			</div>
+			<div class="follow">
+				<% if @the_message.author != nil and @the_message.author != @author and not @author.follows.include?(@the_message.author) %>
+					<%= form_tag(follow_author_path(@the_message.author)) do %>
+						<%= submit_tag "Follow author" %>
+					<% end %>
+				<% end %>
+			</div>
+		</td>
+	</tr>
+</table>

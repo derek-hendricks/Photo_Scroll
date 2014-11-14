@@ -5,6 +5,7 @@ class MessagesController < ApplicationController
   def index
     @title = "Latest messages"
     @messages = Message.all.paginate(:page => params[:page], :per_page => 3)
+    @the_message = Message.new
   end
 
   def streams
@@ -40,15 +41,16 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.new(message_params)
-    @message.author = @author
+    @the_message = Message.new(message_params)
+    @the_message.author = @author
     respond_to do |format|
-      if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
-        format.json { render :show, status: :created, location: @message }
+      if @the_message.save
+        format.html { redirect_to messages_path }
+        format.js { }
+        
       else
         format.html { render :new }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
+        format.json { render json: @the_message.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -79,9 +81,9 @@ class MessagesController < ApplicationController
       @message = Message.find(params[:id])
     end
 
-    def message_params
-      params.require(:message).permit(:contents, :stream, :page)
-    end
+     def message_params
+       params.require(:message).permit(:contents, :stream, :page)
+     end
 
     def login
       author_id = session[:author_id]
