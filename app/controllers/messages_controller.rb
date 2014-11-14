@@ -14,6 +14,8 @@ class MessagesController < ApplicationController
       @title = "Followed messages"
       @messages = @author.followed_messages
     end
+      # convert @author.favourites into array by calling .all so paginate will work when displaying favourites
+      @messages = @author.favourites.all.paginate(:page => params[:page], :per_page => 3)
       # render, otherwise looks for followed.html.erb
     render :action => :index
   end
