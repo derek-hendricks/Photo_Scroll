@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
 
   def index
     @title = "Latest messages"
-    @messages = Message.all
+    @messages = Message.all.paginate(:page => params[:page], :per_page => 3)
   end
 
   def streams
@@ -75,7 +75,7 @@ class MessagesController < ApplicationController
     end
 
     def message_params
-      params.require(:message).permit(:contents, :stream)
+      params.require(:message).permit(:contents, :stream, :page)
     end
 
     def login
