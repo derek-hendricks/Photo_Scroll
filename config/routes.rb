@@ -22,8 +22,7 @@ Rails.application.routes.draw do
       post 'favourite'
     end
   end
-
-  resources :users
+  
   get "images/fivestar"
   get "images/find"
   resources :images

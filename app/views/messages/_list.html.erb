@@ -4,6 +4,7 @@
 		<td>
 			<div style="height: 73px; width: 73px; overflow: hidden">
 				<% if message.author != nil %>
+					<%= link_to message.author.username, message %>
 					<img src="<%= message.author.image %>" width="73"/>
 				<% end %>
 			</div>
