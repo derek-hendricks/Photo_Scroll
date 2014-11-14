@@ -11,14 +11,11 @@ class MessagesController < ApplicationController
   def streams
     if params[:stream] == 'favourites'
       @title = "Favourite messages"
-      @messages = @author.favourites
+      @messages = @author.favourites.all.paginate(:page => params[:page], :per_page => 3)
     elsif params[:stream] == 'followed'
       @title = "Followed messages"
-      @messages = @author.followed_messages
+      @messages = @author.followed_messages.all.paginate(:page => params[:page], :per_page => 3)
     end
-      # convert @author.favourites into array by calling .all so paginate will work when displaying favourites
-      @messages = @author.favourites.all.paginate(:page => params[:page], :per_page => 3)
-      # render, otherwise looks for followed.html.erb
     render :action => :index
   end
 
