@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json
 
   def index
     @title = "Latest messages"
@@ -21,6 +22,8 @@ class MessagesController < ApplicationController
   end
 
   def show
+    @message = Message.find(params[:id])
+    respond_with @message
   end
 
   def new
