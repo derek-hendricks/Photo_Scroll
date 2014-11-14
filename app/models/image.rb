@@ -1,6 +1,6 @@
 class Image < ActiveRecord::Base
 
-  belongs_to :user
+  belongs_to :author
 
   validates(:caption, :description, :url, :rating, :presence => true)
   validates(:caption, :url, :uniqueness => true)

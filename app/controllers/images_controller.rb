@@ -75,9 +75,11 @@ class ImagesController < ApplicationController
    before_filter :login
    private
     def login
-      authenticate_or_request_with_http_basic("The photo pages") do |username, password|
-      @user = User.find_by_username(username)
-      @user != nil && password == @user.password
+      author_id = session[:author_id]
+      if author_id != nil 
+        @author = Author.find(author_id)
+      else 
+        redirect_to login_url, :alert => "You must login"
       end
     end
 end

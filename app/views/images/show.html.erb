@@ -1,32 +1,27 @@
 <p id="notice"><%= notice %></p>
-
 <p>
   <strong>Caption:</strong>
   <%= @image.caption %>
 </p>
-
 <p>
   <strong>Description:</strong>
   <%= simple_format(@image.description) %>
 </p>
-
 <p>
   <strong>Url:</strong>
   <%= @image.url %>
 </p>
-
 <p>
   <img src="<%= @image.url%>">
 </p>
-<p>Posted by <%= @image.user.username %> </p>
+<p>Posted by <%= @image.author.username %> </p>
 <p>
 	<strong>Rating:</strong>
 	<%= simple_format("&#9734;" * (@image.rating / 20)) %>
 </p>
-
-<% if @image.user != nil %>
-  <h2>Other photos by <%= @image.user.full_name %></h2>
-  <%= render :partial=>"others", :locals=>{:images=>@image.user.images} %>
+<% if @image.author != nil %>
+  <h2>Other photos by <%= @image.author.full_name %></h2>
+  <%= render :partial=>"others", :locals=>{:images=>@image.author.images} %>
 <% end %>
 
 <%= link_to 'Edit', edit_image_path(@image) %> |

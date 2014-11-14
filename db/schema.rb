@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112005456) do
+ActiveRecord::Schema.define(version: 20141114072941) do
 
   create_table "author_follows", force: true do |t|
     t.integer  "author_id"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20141112005456) do
     t.integer  "rating"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
+    t.integer  "author_id"
     t.boolean  "flagged"
   end
 
@@ -64,14 +64,6 @@ ActiveRecord::Schema.define(version: 20141112005456) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "priority"
-  end
-
-  create_table "users", force: true do |t|
-    t.string   "full_name"
-    t.string   "username"
-    t.string   "password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
 end
