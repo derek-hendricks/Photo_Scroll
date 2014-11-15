@@ -12,8 +12,21 @@ class AuthorTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
-	# @user.follows reads records in author_follows table that have author_id set to @user.id and then
-  # finds associated authors records with id matching follow_id
+  test "full name should not be too long" do
+    @user.full_name = "a" * 60
+  	assert_not @user.valid?
+  end
+  
+  test "password should not be too long" do
+    @user.password = "a" * 20
+  	assert_not @user.valid?
+  end
+  
+  test "username should not be too long" do
+    @user.username = "a" * 20
+  	assert_not @user.valid?
+  end
+
 	test "user can follow derek" do
 		@user.follows << @derek
 		assert @user.follows.include?(@derek)
