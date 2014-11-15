@@ -2,7 +2,6 @@ require 'test_helper'
 
 class SiteLayoutTest < ActionDispatch::IntegrationTest
   test "layout links" do
-    # get root_path
     get "/login"
 	assert_response :success
    	post_via_redirect "/login", username: authors(:basic_user).username, password: authors(:basic_user).password
@@ -11,5 +10,6 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", messages_path
     assert_select "a[href=?]", images_path
     assert_select "a[href=?]", login_path
+    assert_select "title", full_title("Latest messages")
   end
 end
