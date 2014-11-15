@@ -9,8 +9,7 @@ class AuthorTest < ActiveSupport::TestCase
                      password: "thepassword", password_confirmation: "thepassword")
   end
 
-
-	test "full name should be present" do
+  test "full name should be present" do
     @user.full_name = "     "
     assert_not @user.valid?
   end
@@ -36,7 +35,7 @@ class AuthorTest < ActiveSupport::TestCase
   end
   
   test "password should not be too long" do
-    @user.password = "a" * 20
+    @user.password = "a" * 35
   	assert_not @user.valid?
   end
   
