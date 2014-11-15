@@ -5,7 +5,10 @@ class AuthorTest < ActiveSupport::TestCase
 	def setup
 		@user = authors(:basic_user)
 		@derek = authors(:derek)
-	end
+    @secure_user = Author.new(full_name: "Mary Jane Watson", username: "Jane123", email: "watson@gmail.com",
+                     password: "thepassword", password_confirmation: "thepassword")
+  end
+
 
 	test "full name should be present" do
     @user.full_name = "     "
@@ -54,11 +57,11 @@ class AuthorTest < ActiveSupport::TestCase
 	end
 
   test "email validation should accept valid addresses" do
-    valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
+    valid_addresses = %w[person@example.com USER@foo.COM A_US-ER@foo.bar.org
                          first.last@foo.jp alice+bob@baz.cn]
     valid_addresses.each do |valid_address|
-      @user.email = valid_address
-      assert @user.valid?, "#{valid_address.inspect} should be valid"
+      @secure_user.email = valid_address
+      assert @secure_user.valid?, "#{valid_address.inspect} should be valid"
     end
   end
 
@@ -77,5 +80,5 @@ class AuthorTest < ActiveSupport::TestCase
     @user.save
     assert_not duplicate_user.valid?
   end
-  
+
 end

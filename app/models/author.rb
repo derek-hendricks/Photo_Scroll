@@ -8,6 +8,7 @@ class Author < ActiveRecord::Base
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   	validates :email, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX }
+    has_secure_password
 
 	has_and_belongs_to_many :favourites, :join_table => "favourites", :class_name => "Message", :foreign_key => "fav_author_id"
 	has_many :author_follows
@@ -15,7 +16,6 @@ class Author < ActiveRecord::Base
 	has_many :follow_authors, :class_name => "AuthorFollow", :foreign_key => :follow_id # 2
 	has_many :followers, :through => :follow_authors, :source => :author # 3
 	has_many :images
-
 
 	def followed_messages 
 		Message.followed_by(self.id)
