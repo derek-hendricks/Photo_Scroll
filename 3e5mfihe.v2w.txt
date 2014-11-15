@@ -1,0 +1,17 @@
+﻿add root route
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is ahead of 'origin/master' by 2 commits.
+#   (use "git push" to publish your local commits)
+#
+# You are currently editing a commit while rebasing branch 'master' on 'fc220ee'.
+#
+# Changes to be committed:
+#	modified:   app/assets/stylesheets/custom.css.scss
+#	modified:   app/views/layouts/images.html.erb
+#	modified:   config/routes.rb
+#	new file:   test/integration/site_layout_test.rb
+#
+
