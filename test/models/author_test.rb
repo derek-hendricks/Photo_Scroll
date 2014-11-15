@@ -81,4 +81,17 @@ class AuthorTest < ActiveSupport::TestCase
     assert_not duplicate_user.valid?
   end
 
+  test "password should have a minimum length" do
+    @secure_user.password = @secure_user.password_confirmation = "a" * 5
+    assert_not @secure_user.valid?
+  end
+
+  test "email addresses should be saved as lower-case" do
+    mixed_case_email = "Foo@ExAMPle.CoM"
+    @secure_user.email = mixed_case_email
+    @secure_user.save
+    assert_equal mixed_case_email.downcase, @secure_user.reload.email
+  end
+
+
 end
