@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'logins#form'
+  # root 'logins#form'
 
   controller :logins do 
     get "login" => :form 
