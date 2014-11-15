@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141114072941) do
+ActiveRecord::Schema.define(version: 20141115025017) do
 
   create_table "author_follows", force: true do |t|
     t.integer  "author_id"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20141114072941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin"
+    t.string   "email"
   end
 
   create_table "favourites", id: false, force: true do |t|

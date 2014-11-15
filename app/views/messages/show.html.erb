@@ -5,5 +5,8 @@
   <strong>Contents:</strong>
   <%= @message.contents %>
 </p>
+<p>
+	<%= @message.author.email %>
+</p>
 
 <%= link_to 'Back', messages_path %>
