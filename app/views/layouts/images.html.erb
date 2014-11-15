@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Photo</title>
+  <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= render 'layouts/shim' %>
 </head>
 <body>
-<div style="float:right">
-	Signed in as: <strong><%= @author.full_name %></strong>
-</div>
+	<%= render 'layouts/header' %>
+	<div class="container">
+		<div style="float:right">
+			Signed in as: <strong><%= @author.full_name %></strong>
+		</div>
 
-<%= form_tag(images_find_path, :method => "get", id: "search-form") do %>
-	<%= text_field_tag :search, params[:search], placeholder: "Search" %>
-	<%= submit_tag "Search", :name => nil %>
-<% end %>
+		<%= form_tag(images_find_path, :method => "get", id: "search-form") do %>
+			<%= text_field_tag :search, params[:search], placeholder: "Search" %>
+			<%= submit_tag "Search", :name => nil %>
+		<% end %>
 
-<div style="display:table-cell; width: 200px;">
-	<h1>Photos</h1>
-	<ul>
-		<li><%= link_to_unless_current 'All photos', :images %></li>
-		<li><%= link_to_unless_current 'Fivestar photos', :images_fivestar %></li>
-		<li><%= link_to_unless_current 'New photo', :new_image %></li>
-	</ul>
-</div>
-<%= yield %>
-<hr>
-<h4>Copyright</h4>
-<p> &#169; Copyright 2014 PhotoScroll Unltd.</p>
-<hr>
+		<div style="display:table-cell; width: 200px;">
+			<h1>Photos</h1>
+			<ul>
+				<li><%= link_to_unless_current 'All photos', :images %></li>
+				<li><%= link_to_unless_current 'Fivestar photos', :images_fivestar %></li>
+				<li><%= link_to_unless_current 'New photo', :new_image %></li>
+			</ul>
+		</div>
+		<%= yield %>
+		<%= render 'layouts/footer' %>
+	</div>
 </body>
 </html>
