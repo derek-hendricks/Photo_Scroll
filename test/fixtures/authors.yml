@@ -16,12 +16,14 @@ two:
 
 basic_user:
   full_name: Seymour Papert
+  email: test1@gmail.com
   username: seymour
   password: turtle1
   profile: a E W
 
 admin:
   full_name: Robert Morris
+  email: test2@gmail.com
   username: robm
   password: tappan
   profile: b T e 
@@ -29,6 +31,7 @@ admin:
 
 derek:
   full_name: Derek H
+  email: test3@gmail.com
   username: derekdh7
   password: password
   profile: words words words words

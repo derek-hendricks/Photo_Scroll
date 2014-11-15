@@ -13,11 +13,11 @@ class AuthorsController < ApplicationController
   end
 
   def edit
+    @author = Author.find(params[:id])
   end
 
   def create
     @author = Author.new(author_params)
-
     respond_to do |format|
       if @author.save
         format.html { redirect_to @author, notice: 'Author was successfully created.' }
@@ -69,7 +69,7 @@ class AuthorsController < ApplicationController
     end
 
     def author_params
-      params.require(:author).permit(:full_name, :username, :password, :profile, :image, :admin)
+      params.require(:author).permit(:full_name, :username, :password, :profile, :image, :admin, :email)
     end
 
     def login
