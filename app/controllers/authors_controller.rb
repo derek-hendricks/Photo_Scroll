@@ -26,7 +26,7 @@ class AuthorsController < ApplicationController
         # format.html { redirect_to @author, notice: 'Author was successfully created.' }
         # format.json { render :show, status: :created, location: @author }
       else
-        redirect_to signup_path
+        render 'new'
       end
  
   end

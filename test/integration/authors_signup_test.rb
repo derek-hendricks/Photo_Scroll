@@ -15,6 +15,24 @@ class AuthorsSignupTest < ActionDispatch::IntegrationTest
                                password_confirmation: "bar" }
     end
     assert_template 'authors/new'
+    assert_select 'div#<CSS id for error explanation>'
+    assert_select 'div.<CSS class for field with error>'
+  end
+   test "valid signup information" do
+    get 'authors/new'
+    assert_difference 'Author.count', 1 do
+      post authors_path, author: { full_name:  "",
+                               name: "derekabc",
+                               username: "person",
+                               profile: "some words in profile",
+                               image: "image.com",
+                               admin: true,
+                               email: "user@gmail.com",
+                               password:              "password",
+                               password_confirmation: "password" }
+    end
+    assert_template 'authors/new'
+    assert_not flash.FILL_IN
   end
 end
 
