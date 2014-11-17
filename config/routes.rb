@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     post "login" => :login 
     get "logout" => :logout 
   end
+  get 'signup'  => 'authors#new'
 
   resources :authors do 
     member do 
