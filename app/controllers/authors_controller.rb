@@ -6,6 +6,7 @@ class AuthorsController < ApplicationController
   end
 
   def show
+    @author = Author.find(params[:id])
   end
 
   def new
@@ -18,15 +19,16 @@ class AuthorsController < ApplicationController
 
   def create
     @author = Author.new(author_params)
-    respond_to do |format|
+   
       if @author.save
-        format.html { redirect_to @author, notice: 'Author was successfully created.' }
-        format.json { render :show, status: :created, location: @author }
+        flash[:success] = "Thanks for signing up!"
+        redirect_to login_path
+        # format.html { redirect_to @author, notice: 'Author was successfully created.' }
+        # format.json { render :show, status: :created, location: @author }
       else
-        format.html { render :new }
-        format.json { render json: @author.errors, status: :unprocessable_entity }
+        redirect_to signup_path
       end
-    end
+ 
   end
 
   def update
@@ -60,8 +62,9 @@ class AuthorsController < ApplicationController
       redirect_to login_url, :alert => "You must login"
     end
   end
-  before_filter :login, :except => :follow
+  # before_filter :login, :except => :follow
   # :except follow so login security won't be run when follow method is called
+  # before_filter :login, :only => :index
   private
   
     def set_author
@@ -69,16 +72,13 @@ class AuthorsController < ApplicationController
     end
 
     def author_params
-      params.require(:author).permit(:full_name, :username, :password, :profile, :image, :admin, :email)
+      params.require(:author).permit(:full_name, :username, :password, :password_confirmation, :profile, :image, :admin, :email)
     end
 
     def login
       author_id = session[:author_id]
       if author_id != nil
         @author = Author.find(author_id)
-        unless @author.admin 
-          redirect_to messages_url 
-        end
       else 
         redirect_to login_url, :alert => "you need to login"
       end
