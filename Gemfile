@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.1.7'
-gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -12,6 +10,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'bootstrap-sass',       '3.2.0.0'
 gem 'bcrypt',               '3.1.9'
+gem 'will_paginate', '~> 3.0.7'
 # gem 'unicorn'
 # gem 'capistrano-rails', group: :development
 # gem 'debugger', group: [:development, :test]
@@ -20,6 +19,7 @@ gem 'bcrypt',               '3.1.9'
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'byebug',      '3.4.0'
   gem 'web-console', '2.0.0.beta3'
   gem 'spring',      '1.1.3'
@@ -31,7 +31,7 @@ group :test do
   gem 'guard-minitest',     '2.3.1'
 end
 
-gem 'will_paginate', '~> 3.0.7'
-
-
-
+group :production do
+  gem 'pg',             '0.17.1'
+  gem 'rails_12factor', '0.0.2'
+end
