@@ -19,10 +19,10 @@ class AuthorsController < ApplicationController
 
   def create
     @author = Author.new(author_params)
-   
-      if @author.save
+   if @author.save
+     log_in @author
         flash[:success] = "Thanks for signing up!"
-        redirect_to login_path
+        redirect_to @author
         # format.html { redirect_to @author, notice: 'Author was successfully created.' }
         # format.json { render :show, status: :created, location: @author }
       else

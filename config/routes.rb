@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
   root 'messages#index' 
 
-  controller :logins do 
-    get "login" => :form 
-    post "login" => :login 
-    get "logout" => :logout 
-  end
+  get    'login'   => 'logins#new'
+  post   'login'   => 'logins#create'
+  delete 'logout'  => 'logins#destroy'
+  
   get 'signup'  => 'authors#new'
 
   resources :authors do 

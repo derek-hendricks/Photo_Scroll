@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141115043139) do
+ActiveRecord::Schema.define(version: 20141117075651) do
 
   create_table "author_follows", force: true do |t|
     t.integer  "author_id"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20141115043139) do
     t.boolean  "admin"
     t.string   "email"
     t.string   "password_digest"
+    t.string   "remember_digest"
   end
 
   add_index "authors", ["email"], name: "index_authors_on_email", unique: true

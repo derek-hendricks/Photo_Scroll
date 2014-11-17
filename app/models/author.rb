@@ -1,5 +1,5 @@
 class Author < ActiveRecord::Base
-
+	attr_accessor :remember_token
 	before_save { self.email = email.downcase }
 
 	validates :username, uniqueness: true, presence: true, length: { maximum: 15 }
@@ -13,18 +13,36 @@ class Author < ActiveRecord::Base
 	has_and_belongs_to_many :favourites, :join_table => "favourites", :class_name => "Message", :foreign_key => "fav_author_id"
 	has_many :author_follows
 	has_many :follows, :through => :author_follows
-	has_many :follow_authors, :class_name => "AuthorFollow", :foreign_key => :follow_id # 2
-	has_many :followers, :through => :follow_authors, :source => :author # 3
+	has_many :follow_authors, :class_name => "AuthorFollow", :foreign_key => :follow_id 
+	has_many :followers, :through => :follow_authors, :source => :author 
 	has_many :images
 
 	def followed_messages 
 		Message.followed_by(self.id)
 	end
+	
+	def Author.digest(string)
+    	cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    	BCrypt::Password.create(string, cost: cost)
+  	end
+  	
+ 	def Author.new_token
+    	SecureRandom.urlsafe_base64
+  	end
+  	
+ 	def remember
+		self.remember_token = Author.new_token
+    update_attribute(:remember_digest, Author.digest(remember_token))
+	end
+  
+  def authenticated?(remember_token)
+  	return false if remember_digest.nil?
+    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  end
+  
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
+  
 end
 
-# each author can have many follows they are following. relationship follows represents the authors an author is
-# following. the follows relationship is from an Author to the list of Authors they follow
-
-#2 each author can have several rows in author_follows that represents people who follow them
-
-#3 use through relationship to pass through AuthorFollow model, going straight to list of followers

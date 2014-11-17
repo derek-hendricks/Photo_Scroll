@@ -18,20 +18,21 @@ basic_user:
   full_name: Seymour Papert
   email: test1@gmail.com
   username: seymour
-  password: turtle1
+  password_digest: <%= Author.digest('password') %
   profile: a E W
 
 admin:
   full_name: Robert Morris
   email: test2@gmail.com
   username: robm
-  password: tappan
+  password_digest: <%= Author.digest('password') %
   profile: b T e 
   admin: true
 
-derek:
+bob:
   full_name: Derek H
   email: test3@gmail.com
-  username: derekdh7
-  password: password
+  username: bob
+  password_digest: <%= Author.digest('password') %
   profile: words words words words
+  
