@@ -1,45 +1,35 @@
 <%= form_for(@author) do |f| %>
-  <% if @author.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@author.errors.count, "error") %> prohibited this author from being saved:</h2>
+   <%= render 'shared/error_messages' %>
+   <div class="row">
+     <div class="col-md-6 col-md-offset-3">
+       <%= f.label :full_name %><br>
+       <%= f.text_field :full_name %>
+       
+       <%= f.label :username %><br>
+       <%= f.text_field :username, class: "form-control" %>
+      
+       <%= f.label :email %><br>
+       <%= f.text_field :email, class: "form-control" %>
+      
+      <%= f.label :password %><br>
+      <%= f.text_field :password, class: "form-control" %>
 
-      <ul>
-      <% @author.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <%= f.label :password_confirmation, "Password Confirmation" %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+  
+      <%= f.label :profile %><br>
+      <%= f.text_area :profile, class: "form-control" %>
 
-  <div class="field">
-    <%= f.label :full_name %><br>
-    <%= f.text_field :full_name %>
+      <%= f.label :image %><br>
+      <%= f.text_field :image, class: "form-control" %>
+ 
+      <%= f.label :admin %><br />
+      <%= f.check_box :admin, class: "form-control" %>
+
+      <%= f.submit "Create Author", class: "btn btn-primary" %>
+   
+    
   </div>
-  <div class="field">
-    <%= f.label :username %><br>
-    <%= f.text_field :username %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.text_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :profile %><br>
-    <%= f.text_area :profile %>
-  </div>
-  <div class="field">
-    <%= f.label :image %><br>
-    <%= f.text_field :image %>
-  </div>
-  <div class="field">
-    <%= f.label :admin %><br />
-    <%= f.check_box :admin %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+</div>
+
 <% end %>
