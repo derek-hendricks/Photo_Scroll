@@ -1,6 +1,43 @@
+<% provide(:title, "Edit user") %>
 <h1>Editing author</h1>
 
-<%= render 'form' %>
 
 <%= link_to 'Show', @author %> |
 <%= link_to 'Back', authors_path %>
+
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@author) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+       <%= f.label :full_name %><br>
+       <%= f.text_field :full_name %>
+       
+       <%= f.label :username %><br>
+       <%= f.text_field :username, class: 'form-control' %>
+    
+       <%= f.label :email %><br>
+       <%= f.text_field :email, class: 'form-control' %>
+      
+      <%= f.label :password %><br>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.label :password_confirmation, "Password Confirmation" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+  
+      <%= f.label :profile %><br>
+      <%= f.text_area :profile, class: 'form-control' %>
+
+      <%= f.label :admin %><br/>
+      <%= f.check_box :admin, class: 'form-control' %>
+
+      <%= f.submit "Edit Author", class: "btn btn-primary" %>
+    <% end %>
+
+    <div class="gravatar_edit">
+      <%= gravatar_for @author %>
+      <a href="http://gravatar.com/emails" target=_blank>change</a>
+    </div>
+  </div>
+</div>

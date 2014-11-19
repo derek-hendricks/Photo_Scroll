@@ -10,10 +10,7 @@
 <body>
 	<%= render 'layouts/header' %>
 	<div class="container">
-	<div style="float:right">
-		Signed in as: <span style="font-weight: bold;"><%= @author.full_name %></span>|
-	
-	</div>
+
 	<div style="float: left">
 		<ul>
 			<li><%= link_to_unless_current "All messages", :controller => "messages", :action => "index" %></li>

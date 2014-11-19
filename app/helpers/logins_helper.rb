@@ -4,11 +4,15 @@ module LoginsHelper
     session[:author_id] = author.id
   end
   
-   def remember(author)
+  def remember(author)
     author.remember
     cookies.permanent.signed[:author_id] = author.id
     cookies.permanent[:remember_token] = author.remember_token
-   end
+  end
+   
+  def current_author?(author)
+    author == current_author
+  end
   
   def current_author
     if (author_id = session[:author_id])
@@ -32,11 +36,21 @@ module LoginsHelper
     cookies.delete(:remember_token)
   end
 
-  # Logs out the current user.
+  # Logs out the current author.
   def log_out
     forget(current_author)
     session.delete(:author_id)
     @current_author = nil
+  end
+  
+  def send_back_or(default)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
+  end
+
+  # Stores the URL trying to be accessed.
+  def save_url
+    session[:forwarding_url] = request.url if request.get?
   end
   
 end

@@ -6,7 +6,7 @@
 				<% if message.author != nil %>
 					<%= link_to message.author.username, message %>
 				
-					<%= gravatar_for message.author %>
+					<%= gravatar_for message.author, size: 50 %>
 				<% end %>
 			</div>
 		</td>

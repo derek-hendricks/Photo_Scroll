@@ -1,17 +1,20 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "home", messages_path, id: "logo" %>
+    <%= link_to "Photo Scroll", messages_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav pull-right">
         <% if logged_in? %>
-          <li><%= link_to "Authors", '#' %></li>
+
+          <li><%= link_to current_author.username, author_path(current_author) %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               Site <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Messages", current_author %></li>
-              <li><%= link_to "Images", '#' %></li>
+              <li><%= link_to "Messages", messages_path %></li>
+              <li><%= link_to "Images", images_path %></li>
+              <li><%= link_to "Authors", authors_path %></li>
+              <li><%= link_to "Settings", edit_author_path(current_author) %></li>
               <li class="divider"></li>
               <li>
                 <%= link_to "Log out", logout_path, method: "delete" %>

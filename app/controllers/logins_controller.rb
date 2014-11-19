@@ -1,21 +1,5 @@
 class LoginsController < ApplicationController
 
-  #def login
-	#	username = params[:username]
-	#	password = params[:password]
-	#	author = Author.where("lower(username) = ?", username.downcase).first
-	#	if author && author.authenticate(params[:password])
-	#		session[:author_id] = author.id
-	#		if author.admin 
-	#			redirect_to authors_url 
-	#		else
-	#			redirect_to messages_url
-	#		end
-	#	else
-	#		redirect_to login_url, :alert => "Unknown username/password"
-	#	end
-	#end
-	
 	def new
 	end
 
@@ -27,7 +11,7 @@ class LoginsController < ApplicationController
 		if author && author.authenticate(params[:login][:password])
     	log_in author
     	params[:login][:remember_me] == '1' ? remember(author) : forget(author)
-    	redirect_to author
+    	send_back_or author
     else
     	flash.now[:danger] = "wrong credentials"
 			render 'new'

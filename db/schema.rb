@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117075651) do
+ActiveRecord::Schema.define(version: 20141118220320) do
 
   create_table "author_follows", force: true do |t|
     t.integer  "author_id"
@@ -25,10 +25,9 @@ ActiveRecord::Schema.define(version: 20141117075651) do
     t.string   "username"
     t.string   "password"
     t.text     "profile"
-    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "admin"
+    t.boolean  "admin",           default: false
     t.string   "email"
     t.string   "password_digest"
     t.string   "remember_digest"
