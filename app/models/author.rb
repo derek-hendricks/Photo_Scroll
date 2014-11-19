@@ -1,8 +1,8 @@
 class Author < ActiveRecord::Base
-	attr_accessor :remember_token
-	before_save { self.email = email.downcase }
+  attr_accessor :remember_token
+  before_save { self.email = email.downcase }
 
-	validates :username, uniqueness: true, presence: true, length: { maximum: 30 }
+  validates :username, uniqueness: true, presence: true, length: { maximum: 30 }
 	validates :full_name,  presence: true, length: { maximum: 50 }
   validates :password, presence: true, length: { minimum: 6, maximum: 30 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
