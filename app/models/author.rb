@@ -11,32 +11,32 @@ class Author < ActiveRecord::Base
   has_secure_password
    
   has_and_belongs_to_many :favourites, :join_table => "favourites", :class_name => "Message", :foreign_key => "fav_author_id"
-	has_many :author_follows
-	has_many :follows, :through => :author_follows
-	has_many :follow_authors, :class_name => "AuthorFollow", :foreign_key => :follow_id 
-	has_many :followers, :through => :follow_authors, :source => :author 
-	has_many :images
+  has_many :author_follows
+  has_many :follows, :through => :author_follows
+  has_many :follow_authors, :class_name => "AuthorFollow", :foreign_key => :follow_id 
+  has_many :followers, :through => :follow_authors, :source => :author 
+  has_many :images
 
-	def followed_messages 
-		Message.followed_by(self.id)
-	end
+  def followed_messages 
+    Message.followed_by(self.id)
+  end
 	
-	def Author.digest(string)
-    	cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
-    	BCrypt::Password.create(string, cost: cost)
-  	end
+  def Author.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
   	
- 	def Author.new_token
-    	SecureRandom.urlsafe_base64
-  	end
+ def Author.new_token
+   SecureRandom.urlsafe_base64
+  end
   	
- 	def remember
-		self.remember_token = Author.new_token
-    update_attribute(:remember_digest, Author.digest(remember_token))
-	end
+ def remember
+   self.remember_token = Author.new_token
+   update_attribute(:remember_digest, Author.digest(remember_token))
+ end
   
   def authenticated?(remember_token)
-  	return false if remember_digest.nil?
+    return false if remember_digest.nil?
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
   
