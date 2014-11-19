@@ -4,7 +4,10 @@ Author.create!(full_name: "example name",
                admin: true,
                email: "person678@gmail.com",
                password:              "foobar",
-               password_confirmation: "foobar")
+               password_confirmation: "foobar",
+               activated: true,
+               activated_at: Time.zone.now)
+               
 
 99.times do |n|
   full_name  = Faker::Name.name
@@ -19,5 +22,7 @@ Author.create!(full_name: "example name",
                admin: admin,
                email: email,
                password:              password,
-               password_confirmation: password)
+               password_confirmation: password,
+              activated: true,
+             activated_at: Time.zone.now)
 end

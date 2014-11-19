@@ -22,9 +22,9 @@ class AuthorsController < ApplicationController
   def create
     @author = Author.new(author_params)
     if @author.save
-      log_in @author
-      flash[:success] = "Thanks for signing up!"
-      redirect_to @author
+      @author.send_activation_email
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to login_url
     else
       render 'new'
     end

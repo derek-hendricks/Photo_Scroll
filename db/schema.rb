@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118220320) do
+ActiveRecord::Schema.define(version: 20141119013553) do
 
   create_table "author_follows", force: true do |t|
     t.integer  "author_id"
@@ -27,10 +27,13 @@ ActiveRecord::Schema.define(version: 20141118220320) do
     t.text     "profile"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "admin",           default: false
+    t.boolean  "admin",             default: false
     t.string   "email"
     t.string   "password_digest"
     t.string   "remember_digest"
+    t.string   "activation_digest"
+    t.boolean  "activated",         default: false
+    t.datetime "activated_at"
   end
 
   add_index "authors", ["email"], name: "index_authors_on_email", unique: true

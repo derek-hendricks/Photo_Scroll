@@ -1,0 +1,5 @@
+Hi <%= @author.full_name %>,
+
+Click the link below to activate your account:
+
+<%= edit_account_activation_url(@author.activation_token, email: @author.email) %>

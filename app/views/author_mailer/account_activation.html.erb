@@ -1,0 +1,6 @@
+<p>Hi <%= @author.full_name %>,</p>
+
+<p>Click on the link below to activate your account</p>
+
+<%= link_to "Activate", edit_account_activation_url(@author.activation_token,
+                                                    email: @author.email) %>

@@ -36,4 +36,10 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   
   # config.reload_classes_only_on_change = false
+  
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :test
+  host = 'rails-tutorial-derekhendricks.c9.io'
+  config.action_mailer.default_url_options = { host: host }
+  
 end

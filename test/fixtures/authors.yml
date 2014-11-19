@@ -1,38 +1,30 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  full_name: MyString
-  username: user1
-  password: password1
-  profile: MyText
-  image: MyString
-
-two:
-  full_name: MyString
-  username: MyString
-  password: MyString
-  profile: MyText
-  image: MyString
-
 basic_user:
   full_name: Seymour Papert
   email: test1@gmail.com
   username: seymour
-  password_digest: <%= Author.digest('password') %
-  profile: a E W
+  password_digest: <%= Author.digest('password') %>
+  profile: testing 
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 admin:
   full_name: Robert Morris
   email: test2@gmail.com
   username: robm
-  password_digest: <%= Author.digest('password') %
-  profile: b T e 
+  password_digest: <%= Author.digest('password') %>
+  profile: testing 
   admin: true
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 bob:
   full_name: Derek H
   email: test3@gmail.com
   username: bob
-  password_digest: <%= Author.digest('password') %
+  password_digest: <%= Author.digest('password') %>
   profile: words words words words
+  activated: true
+  activated_at: <%= Time.zone.now %>
   
