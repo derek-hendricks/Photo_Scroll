@@ -31,7 +31,7 @@ class AuthorsController < ApplicationController
   end
 
   def update
-    @author = author.find(params[:id])
+    @author = Author.find(params[:id])
     if @author.update_attributes(author_params)
       flash[:success] = "Profile updated"
       redirect_to @author
