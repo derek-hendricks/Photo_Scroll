@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   root 'messages#index' 
 
   get    'login'   => 'logins#new'
@@ -17,6 +21,7 @@ Rails.application.routes.draw do
   # of things, use a collection do..end rather than members do..end
   
   resources :account_activations, only: [:edit]
+  resources :password_resets,     only: [:new, :create, :edit, :update]
   
   resources :messages do 
     collection do 

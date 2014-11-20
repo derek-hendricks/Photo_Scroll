@@ -14,11 +14,14 @@ class AuthorMailerTest < ActionMailer::TestCase
   end
 
   test "password_reset" do
-    mail = AuthorMailer.password_reset
+    author = authors(:bob)
+    author.reset_token = Author.new_token
+    mail = AuthorMailer.password_reset author
     assert_equal "Password reset", mail.subject
-    assert_equal ["to@example.org"], mail.to
+    assert_equal ["test3@gmail.com"], mail.to
     assert_equal ["noreply@example.com"], mail.from
-    assert_match "Hi", mail.body.encoded
+    assert_match author.reset_token, mail.body.encoded
+    assert_match CGI::escape(author.email), mail.body.encoded
   end
 
 end

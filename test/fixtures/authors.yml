@@ -20,7 +20,7 @@ admin:
   activated_at: <%= Time.zone.now %>
 
 bob:
-  full_name: Derek H
+  full_name: bob
   email: test3@gmail.com
   username: bob
   password_digest: <%= Author.digest('password') %>
