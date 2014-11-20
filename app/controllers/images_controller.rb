@@ -2,7 +2,8 @@ class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
   def index
-    @images = Image.where(['flagged == ? or flagged is null', false])
+    # @images = Image.where(['flagged == ? or flagged is null', false])
+      @images = Image.all
   end
 
   def find 
@@ -62,7 +63,7 @@ class ImagesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  before_filter :login
   private
 
     def set_image
@@ -72,8 +73,7 @@ class ImagesController < ApplicationController
     def image_params
       params.require(:image).permit(:caption, :description, :url, :rating, :flagged)
     end
-   before_filter :login
-   private
+  
     def login
       author_id = session[:author_id]
       if author_id != nil 

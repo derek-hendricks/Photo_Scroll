@@ -18,7 +18,7 @@
           <%= link_to image do %>
             <img src="<%= image.url %>" width="150"/>
             <br/>
-            <%= truncate image.description, :length=>40%>
+            <%= truncate image.description, :length=>40 %>
           <% end %>
         </td>
         <td><%= image.rating %></td>
