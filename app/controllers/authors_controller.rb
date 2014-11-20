@@ -25,10 +25,11 @@ class AuthorsController < ApplicationController
       @author.send_activation_email
       flash[:info] = "Please check your email to activate your account."
       redirect_to login_url
-    else
+     else
       render 'new'
     end
   end
+  
 
   def update
     @author = author.find(params[:id])

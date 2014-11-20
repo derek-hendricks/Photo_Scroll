@@ -13,8 +13,8 @@ gem 'bcrypt',               '3.1.9'
 gem 'will_paginate', '~> 3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'faker',                '1.4.2'
-# gem 'capistrano-rails', group: :development
-# gem 'debugger', group: [:development, :test]
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin]

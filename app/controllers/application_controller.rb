@@ -1,4 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include LoginsHelper
+  
+  def current_user
+   @current_user ||= User.find_by(id: cookies[:user_id]) if cookies[:user_id]
+  end
+ 
+  helper_method :current_user
+
 end
