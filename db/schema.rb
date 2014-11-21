@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120003912) do
+ActiveRecord::Schema.define(version: 20141121135854) do
 
   create_table "author_follows", force: true do |t|
     t.integer  "author_id"
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 20141120003912) do
 
   add_index "authors", ["email"], name: "index_authors_on_email", unique: true
 
+  create_table "comments", force: true do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
   create_table "favourites", id: false, force: true do |t|
     t.integer "fav_author_id"
     t.integer "message_id"
@@ -61,6 +70,7 @@ ActiveRecord::Schema.define(version: 20141120003912) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "author_id"
+    t.string   "picture"
   end
 
   create_table "tasks", force: true do |t|
@@ -73,6 +83,25 @@ ActiveRecord::Schema.define(version: 20141120003912) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "priority"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "avatar_url"
+    t.string   "provider"
+    t.string   "profile_url"
+    t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["provider"], name: "index_users_on_provider"
+  add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
+  add_index "users", ["uid"], name: "index_users_on_uid"
+
+  create_table "votes", id: false, force: true do |t|
+    t.integer "vote_user_id"
+    t.integer "comment_id"
   end
 
 end

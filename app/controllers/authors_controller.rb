@@ -25,10 +25,11 @@ class AuthorsController < ApplicationController
       @author.send_activation_email
       flash[:info] = "Please check your email to activate your account."
       redirect_to login_url
-    else
+     else
       render 'new'
     end
   end
+  
 
   def update
     @author = Author.find(params[:id])
@@ -62,14 +63,6 @@ class AuthorsController < ApplicationController
 
     def author_params
       params.require(:author).permit(:full_name, :username, :password, :password_confirmation, :profile, :admin, :email)
-    end
-
-    def logged_in_author
-      unless logged_in?
-        save_url
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
     end
     
     def correct_author

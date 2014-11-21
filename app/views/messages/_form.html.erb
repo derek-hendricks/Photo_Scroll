@@ -10,12 +10,25 @@
 <% end %>
 
 <% doajax = false unless (defined? doajax) %>
-<%= form_for(@the_message, remote: doajax) do |f| %>
+<%= form_for(@the_message, remote: doajax, html: { multipart: true }) do |f| %>
 	<div class="field">
 		<%= f.label :contents %><br />
 		<%= f.text_area :contents %>
 	</div>
 	<div class="actions">
 		<%= f.submit %>
+		<span class="picture">
+    	<%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+  	</span>
 	</div>
 <% end %>
+
+<script type="text/javascript">
+  $('#the_message_picture').bind('change', function() {
+    size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+</script>
+

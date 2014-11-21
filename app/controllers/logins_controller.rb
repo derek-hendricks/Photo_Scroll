@@ -12,7 +12,8 @@ class LoginsController < ApplicationController
 			if author.activated?
     		log_in author
     		params[:login][:remember_me] == '1' ? remember(author) : forget(author)
-    		send_back_or author
+    		# send_back_or author
+    		redirect_to author
     	else
     		message = "Account not activated"
     		message += "Check your email for the activation link."

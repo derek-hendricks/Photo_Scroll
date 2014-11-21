@@ -1,0 +1,9 @@
+<li id="comment-<%= comment.id %>">
+  <%= link_to image_tag(comment.user.avatar_url, alt: comment.user.name, class: "media-object"),
+              comment.user.profile_url, target: '_blank', class: 'pull-left' %>
+  <span class="user"><%= link_to comment.user.name, comment.user %></span>
+  <span class="content"><%= comment.body %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(comment.created_at) %> ago.
+  </span>
+</li>

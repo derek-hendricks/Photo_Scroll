@@ -18,6 +18,7 @@ class Author < ActiveRecord::Base
 	has_many :followers, :through => :follow_authors, :source => :author 
 	has_many :images
 
+
 	def followed_messages 
 		Message.followed_by(self.id)
 	end

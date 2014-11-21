@@ -12,6 +12,7 @@
 		</td>
 		<td>
 			<%= message.contents %>
+			<%= image_tag message.picture.url if message.picture? %>
 			<br/>
 			<div class="favorites">
 				Favorites: <%= message.favourites.size %>
