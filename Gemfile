@@ -16,8 +16,9 @@ gem 'bootstrap-will_paginate', '0.0.10'
 gem 'faker',                '1.4.2'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'faye-rails', '~> 2.0'
+gem 'thin'
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 group :development, :test do
