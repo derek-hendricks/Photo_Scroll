@@ -18,6 +18,9 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'faye-rails', '~> 2.0'
 gem 'thin'
+gem 'carrierwave',             '0.10.0'
+gem 'mini_magick',             '3.8.0'
+gem 'fog',                     '1.23.0'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 

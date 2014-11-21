@@ -1,8 +1,0 @@
-<h1>Incomplete tasks</h1>
-
-<%= render :partial=>"tasktable", :locals=>{:tasks=>@tasks} %>
-<h2>Overdue</h2>
-<%= render :partial=>"tasktable", :locals=>{:tasks=>@overdue} %>
-<br>
-
-<%= link_to 'New Task', new_task_path %>

@@ -79,7 +79,7 @@ class MessagesController < ApplicationController
     end
 
      def message_params
-       params.require(:message).permit(:contents, :stream, :page)
+       params.require(:message).permit(:contents, :stream, :page, :picture)
      end
 
     def login

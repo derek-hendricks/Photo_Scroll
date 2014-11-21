@@ -2,8 +2,21 @@
   <%= link_to image_tag(comment.user.avatar_url, alt: comment.user.name, class: "media-object"),
               comment.user.profile_url, target: '_blank', class: 'pull-left' %>
   <div class="media-body">
-    <h4 class="media-heading"><%= link_to comment.user.name, comment.user.profile_url, target: '_blank' %> says
+    <h4 class="media-heading"><%= link_to comment.user.name, comment.user %> says
       <small class="text-muted">[at <%= comment.created_at.strftime('%-d %B %Y, %H:%M:%S') %>]</small></h4>
     <p><%= comment.body %></p>
+   
+    Points: <%= comment.votes.count %>
+    <% if @main && !current_user?(comment.user) %>
+    	<div class="votes">
+				<%= form_tag(vote_comment_path(comment)) do %>
+					<%= submit_tag "vote" %>
+				<% end %>
+			</div>
+		<% end %>
+		<% if current_user?(comment.user) %>
+      <%= link_to "delete comment?", comment, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    <% end %>
   </div>
 </li>

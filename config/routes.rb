@@ -32,15 +32,19 @@ Rails.application.routes.draw do
   get "images/fivestar"
   get "images/find"
   resources :images
-  get "tasks/incomplete"
-  get "tasks/search"
-  resources :tasks
+ 
+  resources :users
+  get 'home' => 'static_pages#home'
   
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/failure', to: 'sessions#auth_fail'
   get '/sign_out', to: 'sessions#destroy', as: :sign_out
   
-  resources :comments, only: [:new, :create]
+  resources :comments, only: [:new, :create, :show, :destroy] do 
+    member do 
+      post 'vote'
+    end
+  end
  
 
 

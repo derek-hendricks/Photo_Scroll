@@ -1,5 +1,11 @@
 class User < ActiveRecord::Base
   has_many :comments, dependent: :delete_all
+  has_and_belongs_to_many :votes, :join_table => "votes", :class_name => "Comment", :foreign_key => "vote_user_id"
+  
+  def feed
+    Comment.where("user_id = ?", id)
+  end
+
   class << self
     def from_omniauth(auth)
       provider = auth.provider
