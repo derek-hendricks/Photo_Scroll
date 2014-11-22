@@ -1,13 +1,11 @@
 if Rails.env.production?
   CarrierWave.configure do |config|
     config.fog_credentials = {
-      # Configuration for Amazon S3
-      :provider              => 'AWS',
-      :aws_access_key_id     => ENV['S3_ACCESS_KEY'],
-      :aws_secret_access_key => ENV['S3_SECRET_KEY'],
-      :region                 => 'us-east-1'
+        :provider                         => 'Google',
+        :google_storage_access_key_id => ENV['ACCESS_KEY'],
+        :google_storage_secret_access_key =>  ENV['SECRET_KEY']
     }
-     config.fog_directory  = 'photoderek'                   
-     config.fog_host       = 'https://s3-us-east-1.amazonaws.com/photoderek' 
-  end
+    config.fog_directory = 'myphotosdh7'
 end
+end
+
