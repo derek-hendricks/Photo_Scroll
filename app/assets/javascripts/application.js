@@ -13,8 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require jquery.history.js
+//= require bind_with_delay
+//= require waypoints
+//= require pagination
 //= require turbolinks
 //= require jquery.turbolinks
 //= require faye
 //= require comments
+//= require messages
 //= require_tree .

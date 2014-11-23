@@ -1,3 +1,55 @@
 // Place all the styles related to the Messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.img-gravatar {
+  float:right;
+}
+
+.caption {
+  position: absolute; 
+  bottom: 0; 
+  left: 10;
+  background: black;
+  opacity: 0.9;
+  padding:5px;
+  border-radius:5px;
+}
+
+.img-name {
+   color: white; 
+  
+}
+
+.row {
+  margin-bottom:20px;
+}
+
+
+a.img-name {
+  &:visited {
+    color: #fff !important;
+  }
+}
+
+.col-md-3 {
+  margin-bottom:30px;
+}
+
+
+.effect {
+  color:white;
+  font-size:.85em;
+}
+
+.follow {
+  
+}
+.follow-author {
+  background-color: none;
+  font-size:15px;
+}
+
+.gravatar {
+  display:inline;
+}

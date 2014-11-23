@@ -58,11 +58,23 @@ class AuthorsController < ApplicationController
       redirect_to login_url, :alert => "You must login"
     end
   end
+  
+  def unfollow 
+    author_id = session[:author_id]
+    if author_id != nil 
+      logged_in_author = Author.find(author_id)
+      author = Author.find(params[:id])
+      logged_in_author.follows.delete(author) if author.followers.include? logged_in_author 
+      redirect_to messages_url
+    else
+      redirect_to login_url, :alert => "You must login"
+    end
+  end
 
   private
 
     def author_params
-      params.require(:author).permit(:full_name, :username, :password, :password_confirmation, :profile, :admin, :email)
+      params.require(:author).permit(:username, :password, :password_confirmation, :email)
     end
     
     def correct_author

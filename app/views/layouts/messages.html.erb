@@ -4,6 +4,7 @@
   <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'messages' %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
 </head>
@@ -15,7 +16,9 @@
 		<ul>
 			<li><%= link_to_unless_current "All messages", :controller => "messages", :action => "index" %></li>
 			<li><%= link_to_unless_current "Followed", :controller => "messages", :action => "streams", :stream => "followed" %></li>
-			<li><%= link_to_unless_current "Favourites", :controller => "messages", :action => "streams", :stream => "favourites" %></li>
+			<% unless params[:author] %>
+				<li><%= link_to_unless_current "Favourites", :controller => "messages", :action => "streams", :stream => "favourites" %></li>
+			<% end %>
 		</ul>
 	</div>
 	<%= yield %>

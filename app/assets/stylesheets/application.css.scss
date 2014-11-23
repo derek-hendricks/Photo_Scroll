@@ -21,3 +21,17 @@
   max-height: 500px;
   overflow: auto;
 }
+
+#load_more_posts {
+  display: none;
+  margin-bottom: 10px;
+}
+
+#static-pagination {
+  position: fixed;
+  top: 30px;
+  opacity: 0.7;
+  &:hover {
+    opacity: 1;
+  }
+}

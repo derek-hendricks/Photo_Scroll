@@ -32,6 +32,7 @@ GEM
     arel (5.0.1.20140414130214)
     bcrypt (3.1.9)
     bcrypt (3.1.9-x86-mingw32)
+    betterlorem (0.1.2)
     binding_of_caller (0.7.3.pre1)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.2.0.0)
@@ -307,6 +308,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (= 3.1.9)
+  betterlorem (~> 0.1.2)
   bootstrap-sass (= 3.2.0.0)
   bootstrap-will_paginate (= 0.0.10)
   byebug (= 3.4.0)

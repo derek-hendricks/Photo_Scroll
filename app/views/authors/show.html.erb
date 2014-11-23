@@ -2,9 +2,11 @@
 
 <h2 style="text-align:center">
  
-  <%= @author.full_name %>'s Page
+  <%= @author.username %>'s Page
 </h2>
-
+<p>Followers:<%= @author.followers.count %></p>
+<p>Following: <%= @author.follows.count%> </p>
+<p>Favourites:<%= link_to @author.favourites.count, list_favourites_path(:author => @author) %></p>
 <p>
   <strong>Username:</strong>
    

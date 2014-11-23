@@ -1,17 +1,21 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
-  respond_to :html, :json
+  
+    def index
+      @title = "Latest messages"
+      @the_message = Message.new
+      get_and_show_posts
+    end
 
-  def index
-    @title = "Latest messages"
-    @messages = Message.all.paginate(:page => params[:page], :per_page => 3)
-    @the_message = Message.new
-  end
+    def index_with_button
+      get_and_show_posts
+    end
 
   def streams
-    if params[:stream] == 'favourites'
+    if params[:stream] == 'favourites' || params[:author]
       @title = "Favourite messages"
-      @messages = @author.favourites.all.paginate(:page => params[:page], :per_page => 3)
+      params[:author] ? author = Author.find(params[:author]) : author = @author
+      @messages = author.favourites.all.paginate(:page => params[:page], :per_page => 3)
     elsif params[:stream] == 'followed'
       @title = "Followed messages"
       @messages = @author.followed_messages.all.paginate(:page => params[:page], :per_page => 3)
@@ -21,7 +25,6 @@ class MessagesController < ApplicationController
 
   def show
     @message = Message.find(params[:id])
-    respond_with @message
   end
 
   def new
@@ -74,12 +77,20 @@ class MessagesController < ApplicationController
   before_filter :login
   private
   
+    def get_and_show_posts
+      @messages = Message.paginate(page: params[:page], per_page: 8).order('created_at DESC')
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    end
+  
     def set_message
       @message = Message.find(params[:id])
     end
 
      def message_params
-       params.require(:message).permit(:contents, :stream, :page, :picture)
+       params.require(:message).permit(:contents, :stream, :picture, :author)
      end
 
     def login

@@ -1,34 +1,23 @@
-<% messages.each do |message| %>
-<table>
-	<tr>
-		<td>
-			<div style="height: 73px; width: 73px; overflow: hidden">
-				<% if message.author != nil %>
-					<%= link_to message.author.username, message %>
-				
-					<%= gravatar_for message.author, size: 50 %>
-				<% end %>
-			</div>
-		</td>
-		<td>
-			<%= message.contents %>
-			<%= image_tag message.picture.url if message.picture? %>
-			<br/>
-			<div class="favorites">
-				Favorites: <%= message.favourites.size %>
-				<%= form_tag(favourite_message_path(message)) do %>
-					<%= submit_tag "Add as favorite" %>
-				<% end %>
-			</div>
-			<div class="follow">
-				<% if message.author != nil and message.author != @author and not @author.follows.include?(message.author) %>
-					<%= form_tag(follow_author_path(message.author)) do %>
-						<%= submit_tag "Follow author" %>
-					<% end %>
-				<% end %>
-			</div>
-	</td>
-</tr>
-
-</table>
+<% messages.in_groups_of(4, false).each do |group| %>
+  <div class='row'>
+    <% group.each do |message| %>
+    
+      <div class='col-md-3'>
+        <%= image_tag(message.picture.url, class: "img-responsive") %>
+	        <div class="caption">
+	        	<% if message.author != nil %>
+							<%= gravatar_for message.author, size: 50, :class => "img-gravatar" %>
+							<%= link_to message.author.username, message, :class => "img-name" %>
+					
+				 	  <% end %>
+	       </div>
+      </div>
+      
+    <% end %>
+  </div>
 <% end %>
+
+	
+
+
+

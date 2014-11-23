@@ -14,12 +14,15 @@ Rails.application.routes.draw do
   resources :authors do 
     member do 
       post 'follow'
+      post 'unfollow'
     end
   end
 
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   
+   get '/posts_with_button', to: 'messages#index_with_button', as: 'posts_with_button'
+   get 'favourites/:author' => 'messages#streams', as: 'list_favourites'
   resources :messages do 
     collection do 
       get 'streams/:stream', :action => :streams, :as => "streams"
@@ -28,11 +31,7 @@ Rails.application.routes.draw do
       post 'favourite'
     end
   end
-  
-  get "images/fivestar"
-  get "images/find"
-  resources :images
- 
+
   resources :users
   get 'home' => 'static_pages#home'
   
@@ -45,7 +44,4 @@ Rails.application.routes.draw do
       post 'vote'
     end
   end
- 
-
-
-end
+ end

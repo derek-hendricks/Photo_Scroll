@@ -4,7 +4,6 @@ class Author < ActiveRecord::Base
   before_create :create_activation_digest
 
   validates :username, uniqueness: true, presence: true, length: { maximum: 30 }
-  validates :full_name,  presence: true, length: { maximum: 50 }
   validates :password, presence: true, length: { minimum: 6, maximum: 30 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 255 },
@@ -16,7 +15,6 @@ class Author < ActiveRecord::Base
   has_many :follows, :through => :author_follows
   has_many :follow_authors, :class_name => "AuthorFollow", :foreign_key => :follow_id 
   has_many :followers, :through => :follow_authors, :source => :author 
-  has_many :images
 
 
   def followed_messages 
