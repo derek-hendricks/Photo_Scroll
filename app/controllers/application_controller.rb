@@ -11,7 +11,11 @@ class ApplicationController < ActionController::Base
   end
  
   helper_method :current_user
-
+  
+  def user_logged_in?
+    !current_user.nil?
+  end
+  
   private 
     def logged_in_author
       unless logged_in?

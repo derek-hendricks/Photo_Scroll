@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :logged_in_author, only: [:create, :destroy]
+  before_action :logged_in_author, only: [:create, :destroy, :vote, :new]
   before_action :correct_user,   only: :destroy
   
   def new
@@ -40,7 +40,7 @@ class CommentsController < ApplicationController
   end
   
   private
- 
+    
     def comment_params
       params.require(:comment).permit(:body)
     end

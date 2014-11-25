@@ -14,4 +14,18 @@ class StaticPagesController < ApplicationController
 
   def contact
   end
+   before_filter :login
+   private 
+    
+    def login 
+     author_id = session[:author_id]
+      if author_id != nil 
+        if !user_logged_in?
+          redirect_to new_comment_url, :alert => "In order to view home page, you need to connect to one of social networks below"
+        end
+        @author = Author.find(author_id)
+      else 
+        redirect_to login_url, :alert => "You must login"
+      end
+    end
 end

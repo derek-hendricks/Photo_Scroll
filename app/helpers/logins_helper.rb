@@ -39,6 +39,7 @@ module LoginsHelper
   # Logs out the current author.
   def log_out
     forget(current_author)
+    cookies.delete(:user_id)
     session.delete(:author_id)
     @current_author = nil
   end
