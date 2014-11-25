@@ -7,6 +7,18 @@
       <section class="comment_form">
         <%= render 'comments/form' %>
       </section>
+      <section>
+        <%= will_paginate @following %>
+        <% @following.in_groups_of(4, false).each do |group| %>
+          <div class='row'>
+            <% group.each do |author| %>
+              <div class='col-md-3'>
+                <%= gravatar_for author, size: 50, :class => "img-gravatar" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </section>
     </aside>
      <div class="col-md-8">
         <h3>Comment Feed</h3>

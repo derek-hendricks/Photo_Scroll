@@ -3,6 +3,8 @@ class StaticPagesController < ApplicationController
     if logged_in? && current_user
       @comment  = current_user.comments.build
       @feed_items = current_user.feed
+      @messages = @author.followed_messages.all
+      @following = @author.follows.paginate(:page => params[:page], :per_page => 12)
     end
   end
 

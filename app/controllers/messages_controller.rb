@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json
   
     def index
       @title = "Latest messages"
@@ -38,6 +39,11 @@ class MessagesController < ApplicationController
     message = Message.find(params[:id])
     @author.favourites << message unless @author.favourites.include? message
     redirect_to messages_url
+  end
+  
+  def unfavourite 
+    message = Message.find(params[:id])
+    @author.favourites.delete(message) if @author.favourites.include? message
   end
 
   def create

@@ -9,7 +9,13 @@
 
 <div id="my-posts">
   <div class="page-delimiter first-page" data-page="<%= params[:page] || 1 %>"></div>
-    <%= render @messages %>
+  <% @messages.in_groups_of(4, false).each do |group| %>
+    <div class='row'>
+      <% group.each do |message| %>
+       <%= render partial: "message", locals: { message: message } %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
     
 <% if @messages.next_page %>

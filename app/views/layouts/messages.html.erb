@@ -4,7 +4,7 @@
   <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'messages' %>
+
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
 </head>
@@ -12,14 +12,24 @@
 	<%= render 'layouts/header' %>
 	<div class="container">
 
-	<div style="float: left">
-		<ul>
-			<li><%= link_to_unless_current "All messages", :controller => "messages", :action => "index" %></li>
-			<li><%= link_to_unless_current "Followed", :controller => "messages", :action => "streams", :stream => "followed" %></li>
-			<% unless params[:author] %>
-				<li><%= link_to_unless_current "Favourites", :controller => "messages", :action => "streams", :stream => "favourites" %></li>
-			<% end %>
-		</ul>
+	<div class='row'>
+		<% if @the_message then %>
+			<%= render 'form' %>
+		<% end %>
+		<div class="col-md-4">
+			<div class='row'>
+				<div class="col-md-4 text-center"><strong>Messages</strong></div>
+			</div>
+			<div class='row'>
+				<div class="col-md-1"><%= link_to_unless_current "All", :controller => "messages", :action => "index" %></div>
+				<div class="col-md-2"><%= link_to_unless_current "Followed", :controller => "messages", :action => "streams", :stream => "followed" %></div>
+				<div class="col-md-1">
+					<% unless params[:author] %>
+						<%= link_to_unless_current "Favourites", :controller => "messages", :action => "streams", :stream => "favourites" %>
+					<% end %>
+				</div>
+			</div>
+  	</div>
 	</div>
 	<%= yield %>
 	<%= render 'layouts/footer' %>

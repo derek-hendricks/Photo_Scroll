@@ -21,5 +21,4 @@
 //= require jquery.turbolinks
 //= require faye
 //= require comments
-//= require messages
 //= require_tree .

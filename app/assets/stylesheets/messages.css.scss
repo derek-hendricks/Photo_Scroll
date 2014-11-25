@@ -34,12 +34,26 @@ a.img-name {
 
 .col-md-3 {
   margin-bottom:30px;
+  position:relative;
+
 }
 
+.add_favourite {
+  position: absolute;
+  top: 0px;
+  left: 10;
+  height: 15%;
+  background: steelblue;
+  color: white;
+  text-align: center;
+  padding: 3px;
+  display: none;
+  border: 1px solid steelblue;
+}
 
 .effect {
-  color:white;
-  font-size:.85em;
+  color: white;
+  font-size: .85em;
 }
 
 .follow {
@@ -52,4 +66,8 @@ a.img-name {
 
 .gravatar {
   display:inline;
+}
+
+.img-responsive {
+  text-align:left;
 }

@@ -1,3 +1,4 @@
+<%= will_paginate messages %>
 <% messages.in_groups_of(4, false).each do |group| %>
   <div class='row'>
     <% group.each do |message| %>

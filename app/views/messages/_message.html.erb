@@ -1,9 +1,25 @@
 <div class='col-md-3'>
+
+	<div class="add_favourite">
+		<div class='col-md-4'>
+			<% if !current_author?(message.author) && !current_author.favourites.include?(message) %>
+				<%= link_to "Add?", favourite_message_path(id: message), method: :post %>
+			<% end %>
+			<% if current_author.favourites.include? message %>
+				<%= link_to "Unadd?", unfavourite_message_path(id: message), method: :post %>
+			<% end %>
+		</div>
+		<div class='col-md-8'>
+			Favs: <%= message.favourites.count %>
+		</div>
+	</div>	
 	<%= image_tag(message.picture.url, class: "img-responsive") %>
 	<div class="caption">
 	  <% if message.author != nil %>
 	    <%= link_to message.author.username, message, :class => "img-name" %>
-			<div class="gravatar">	<%= gravatar_for message.author, size: 50, :class => "img-gravatar" %>
+			<div class="gravatar">
+				
+				<%= gravatar_for message.author, size: 50, :class => "img-gravatar" %>
 				<div class="effect">
 					<%= truncate(message.contents, length: 20) %> <br/>
 						<div style="display:inline;"class="follow">
@@ -21,5 +37,5 @@
 			</div>
 		<% end %>
 	</div>
-</div>
 
+</div>

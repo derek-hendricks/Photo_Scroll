@@ -11,16 +11,23 @@
 
 <% doajax = false unless (defined? doajax) %>
 <%= form_for(@the_message, remote: doajax, html: { multipart: true }) do |f| %>
-	<div class="field">
-		<%= f.label :contents %><br />
-		<%= f.text_area :contents %>
-	</div>
-	<div class="actions">
-		<%= f.submit %>
-		<span class="picture">
-    	<%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
-  	</span>
-	</div>
+
+  	<div class="col-md-4">
+  		<div class="form-group">
+				<span class="picture">
+					<%= f.label :picture %>
+    			<%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+    			<%= f.submit %>
+  			</span>
+			</div>
+  	</div>
+  	<div class="col-md-4">
+  		<div class="form-group">
+				<%= f.label :contents %><br />
+				<%= f.text_area :contents %>
+			</div>
+  	</div>
+
 <% end %>
 
 <script type="text/javascript">
