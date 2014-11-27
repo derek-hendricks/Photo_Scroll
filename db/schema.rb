@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141121135854) do
+ActiveRecord::Schema.define(version: 20141127021529) do
 
   create_table "author_follows", force: true do |t|
     t.integer  "author_id"
@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(version: 20141121135854) do
   end
 
   add_index "authors", ["email"], name: "index_authors_on_email", unique: true
+  add_index "authors", ["username"], name: "index_authors_on_username", unique: true
+
+  create_table "authors_users", id: false, force: true do |t|
+    t.integer "join_user_id"
+    t.integer "author_id"
+  end
 
   create_table "comments", force: true do |t|
     t.text     "body"

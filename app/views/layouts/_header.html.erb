@@ -1,7 +1,7 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "Photo Scroll", messages_path, id: "logo" %>
     <nav>
+       <%= link_to "Photo Scroll", home_path, id: "logo" %>
       <ul class="nav navbar-nav pull-right">
         <% if current_user %>
           <li><%= image_tag current_user.avatar_url %></li>

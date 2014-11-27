@@ -11,6 +11,9 @@ class Author < ActiveRecord::Base
   has_secure_password
    
   has_and_belongs_to_many :favourites, :join_table => "favourites", :class_name => "Message", :foreign_key => "fav_author_id"
+  has_and_belongs_to_many :authors_users, :join_table => "authors_users", :class_name => "User", :association_foreign_key => "join_user_id"
+
+
   has_many :author_follows
   has_many :follows, :through => :author_follows
   has_many :follow_authors, :class_name => "AuthorFollow", :foreign_key => :follow_id 

@@ -34,7 +34,9 @@ Rails.application.routes.draw do
   end
 
   resources :users
+  get 'home/:username' => 'static_pages#home', as: :username
   get 'home' => 'static_pages#home'
+ 
   
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/failure', to: 'sessions#auth_fail'

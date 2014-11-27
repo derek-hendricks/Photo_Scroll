@@ -1,8 +1,11 @@
 class StaticPagesController < ApplicationController
+  
   def home
     if logged_in? && current_user
-      @comment  = current_user.comments.build
-      @feed_items = current_user.feed
+      @user = params[:username] ? Author.find_by(username: params[:username]).authors_users[0] : current_user 
+      @author = params[:username] ? Author.find_by(username: params[:username]) : @author 
+      @comment  = @user.comments.build
+      @feed_items = @user.feed
       @messages = @author.followed_messages.all
       @following = @author.follows.paginate(:page => params[:page], :per_page => 12)
     end
@@ -17,7 +20,12 @@ class StaticPagesController < ApplicationController
   def contact
   end
    before_filter :login
+   
    private 
+
+     def static_page_params
+      params.require(:static_page).permit(:username)
+    end
     
     def login 
      author_id = session[:author_id]
