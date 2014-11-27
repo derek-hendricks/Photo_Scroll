@@ -1,0 +1,10 @@
+Conversation with: <%= @conversation.originator.username %><br/>
+Sent On: <%= @conversation.created_at %> <br/>
+
+<% @receipts.each do |receipt| %> 
+  Status: <%= receipt.is_unread? ? "read" : "unread" %><br/>
+  <% message = receipt.message %>
+  Subject: <%= message.subject %><br/>
+  Contents:<br/>
+  <%= message.body %>
+<% end %>

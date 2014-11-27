@@ -9,7 +9,7 @@
       </section>
       <section>
         <%= will_paginate @following %>
-        <% @following.in_groups_of(4, false).each do |group| %>
+        <% @following.in_groups_of(4, false).each do |group| if @following %>
           <div class='row'>
             <% group.each do |author| %>
               <div class='col-md-3'>
@@ -17,6 +17,7 @@
               </div>
             <% end %>
           </div>
+        <% end %>
         <% end %>
       </section>
     </aside>
@@ -35,7 +36,5 @@
 
     <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
   </div>
-
 <% end %>
 
-fkU9mEn0aBamCnuVI0tV2A

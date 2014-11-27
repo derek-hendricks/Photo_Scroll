@@ -9,6 +9,12 @@ class AuthorsController < ApplicationController
 
   def show
     @author = Author.find(params[:id])
+    @inbox = current_author.mailbox.inbox
+  end
+  
+  def inbox
+    @conversation = current_author.mailbox.inbox.find(params[:message])
+    @receipts = @conversation.receipts_for current_author
   end
 
   def new
@@ -74,7 +80,7 @@ class AuthorsController < ApplicationController
   private
 
     def author_params
-      params.require(:author).permit(:username, :password, :password_confirmation, :email)
+      params.require(:author).permit(:username, :password, :password_confirmation, :email, :message)
     end
     
     def correct_author

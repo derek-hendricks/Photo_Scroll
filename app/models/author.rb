@@ -9,17 +9,29 @@ class Author < ActiveRecord::Base
   validates :email, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX }
   has_secure_password
+  
+  acts_as_messageable
    
   has_and_belongs_to_many :favourites, :join_table => "favourites", :class_name => "Message", :foreign_key => "fav_author_id"
   has_and_belongs_to_many :authors_users, :join_table => "authors_users", :class_name => "User", :association_foreign_key => "join_user_id"
-
-
   has_many :author_follows
   has_many :follows, :through => :author_follows
   has_many :follow_authors, :class_name => "AuthorFollow", :foreign_key => :follow_id 
   has_many :followers, :through => :follow_authors, :source => :author 
 
-
+  
+  def name
+    return "email test"
+  end
+  
+  def mailboxer_email(object)
+  #Check if an email should be sent for that object
+  #if true
+    return downcase_email
+  #if false
+  #return nil
+  end
+  
   def followed_messages 
     Message.followed_by(self.id)
   end

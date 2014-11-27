@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get 'password_resets/new'
-
-  get 'password_resets/edit'
 
   root 'messages#index' 
+  
+  get 'password_resets/new'
+  get 'password_resets/edit'
 
   get    'login'   => 'logins#new'
   post   'login'   => 'logins#create'
@@ -15,14 +15,15 @@ Rails.application.routes.draw do
     member do 
       post 'follow'
       post 'unfollow'
+      get 'inbox/:message' => 'authors#inbox', as: :inbox
     end
   end
 
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   
-   get '/posts_with_button', to: 'messages#index_with_button', as: 'posts_with_button'
-   get 'favourites/:author' => 'messages#streams', as: 'list_favourites'
+  get '/posts_with_button', to: 'messages#index_with_button', as: 'posts_with_button'
+  get 'favourites/:author' => 'messages#streams', as: 'list_favourites'
   resources :messages do 
     collection do 
       get 'streams/:stream', :action => :streams, :as => "streams"

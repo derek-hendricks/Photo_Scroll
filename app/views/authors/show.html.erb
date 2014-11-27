@@ -9,9 +9,7 @@
 <p>Favourites:<%= link_to @author.favourites.count, list_favourites_path(:author => @author) %></p>
 <p>
   <strong>Username:</strong>
-   
   <%= @author.username %>
- 
 </p>
 <div>
   <%= gravatar_for @author, size: 50 %>
@@ -21,7 +19,10 @@
   <strong>Description:</strong>
   <%= @author.profile %>
 </p>
-
+<% @inbox.each do |message| %>
+<%= message.inspect %>
+  <p><%= link_to(message.subject, inbox_author_path(:id => @author, :message => message.id)) %> | From <%= message.originator.username %> | sent at: <%= message.created_at %></p>
+<% end %>
 
 <%= link_to 'Edit', edit_author_path(@author) %> |
 <%= link_to 'Back', authors_path %>
