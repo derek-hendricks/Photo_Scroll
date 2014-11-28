@@ -17,6 +17,16 @@ Rails.application.routes.draw do
       post 'unfollow'
       get 'inbox/:message' => 'authors#inbox', as: :inbox
     end
+    
+  end
+  
+  resources :conversations, only: [:index, :show, :new, :create] do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+      get :send, to: 'conversations#new', as: :send
+    end
   end
 
   resources :account_activations, only: [:edit]

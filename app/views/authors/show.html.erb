@@ -1,28 +1,64 @@
 <p id="notice"><%= notice %></p>
+<div class='row'>
+  <div class="col-md-6">
+    <h1 style="text-align:left;"><%= gravatar_for @author, size: 50 %>
+    <%= @author.username %></h1>
+  </div>
 
-<h2 style="text-align:center">
- 
-  <%= @author.username %>'s Page
-</h2>
-<p>Followers:<%= @author.followers.count %></p>
-<p>Following: <%= @author.follows.count%> </p>
-<p>Favourites:<%= link_to @author.favourites.count, list_favourites_path(:author => @author) %></p>
-<p>
-  <strong>Username:</strong>
-  <%= @author.username %>
-</p>
-<div>
-  <%= gravatar_for @author, size: 50 %>
+  <div class="col-md-6">
+    <ul class="author-activity">
+      <li>Followers: <%= @author.followers.count %></li>
+      <li>Following: <%= @author.follows.count%> </li>
+      <li><%= link_to "Favourties: #{@author.favourites.count}", list_favourites_path(:author => @author) %></li>
+    </ul>
+  </div>
 </div>
+<div class='row'>
+  <div class="col-md-4">
+    <h2>Inbox</h2>
+    <% @inbox.each do |message| %>
+      <p>
+        <%= link_to(message.subject, inbox_author_path(:id => @author, :message => message.id)) %> | 
+        From <%= link_to(message.originator.username, username_path(:username => message.originator.username)) %> | 
+        sent at: <%= message.created_at %>
+      </p>
+    <% end %>
+    <%= will_paginate @inbox, :param_name => 'inbox_page' %>
+    <%= link_to "New Message", new_conversation_path, class: "btn btn-primary mail" %>
+  </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @author.profile %>
-</p>
-<% @inbox.each do |message| %>
-<%= message.inspect %>
-  <p><%= link_to(message.subject, inbox_author_path(:id => @author, :message => message.id)) %> | From <%= message.originator.username %> | sent at: <%= message.created_at %></p>
-<% end %>
+  <div class="col-md-4">
+    <h2>Conversations</h2>
+    <% @conversations.each do |conversation| %>
+      <p>
+        <% if conversation.originator.username != current_author.username %>
+          <%= link_to("conversation", inbox_author_path(:id => current_author, :message => conversation.id)) %> |
+          From: <%= conversation.originator.username %> | Sent at: <%= conversation.created_at %>
+        <% else %>
+          <% conversation.recipients.each do |recipient| %>
+            <% if recipient.id != current_author.id %>
+              <%= link_to("conversation", inbox_author_path(:id => recipient.id, :message => conversation.id)) %> |
+              From: <%= conversation.originator.username %> | Sent at: <%= conversation.created_at %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <%= will_paginate @conversations, :param_name => 'conversations_page' %>
+  </div>
+  
+  <div class="col-md-4">
+    <h2>Sent Messages</h2>
+    <% @sent.each do |message| %>
+      <% message.recipients.each do |recipient| %>
+        <% if recipient.id != current_author.id %>
+          <p><%= link_to(message.subject, inbox_author_path(:id => recipient.id, :message => message.id)) %> |
+           Sent at: <%= message.created_at %></p>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= will_paginate @sent, :param_name => 'sent_page' %>
+  </div>
+  
 
-<%= link_to 'Edit', edit_author_path(@author) %> |
-<%= link_to 'Back', authors_path %>
+  
+</div>

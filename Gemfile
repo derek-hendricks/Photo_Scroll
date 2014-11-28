@@ -23,6 +23,7 @@ gem 'mini_magick',             '3.8.0'
 gem 'fog',                     '1.23.0'
 gem 'betterlorem', '~> 0.1.2'
 gem 'mailboxer'
+gem 'simple_form'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 

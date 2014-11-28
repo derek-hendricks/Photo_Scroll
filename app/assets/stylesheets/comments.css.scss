@@ -6,19 +6,7 @@
 @import 'bootstrap/theme';
 
 .social {
-
-  display: inline-block;
-  &.twitter {
-    width: 50px;
-    height: 42px;
-    background-position: 0 -52px;
-  }
- 
-  &.facebook, &.facebook:active {
-    width: 50px;
-    height: 50px;
-    background-position: 0 0;
-  }
+  margin-top:30px;
 }
 
 #comments {

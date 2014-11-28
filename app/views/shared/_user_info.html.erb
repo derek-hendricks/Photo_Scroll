@@ -1,6 +1,12 @@
-<h1><%= link_to @user.name, @user %></h1>
+<div class='row'>
+  <div class="col-md-8">
+   <h1 class="user-heading"><%= @author.username %>'s Page</h1>
+  </div>
+  <div class="col-md-4">
+    <%= link_to "Message", send_conversation_path(@author), class: "btn btn-primary mail" %>
+  </div>
+</div>
 <div>
-
 <p><%= @user.comments.count %> Comments
 <span style="float:left;margin:5px;"><%= link_to image_tag(@user.avatar_url, alt: @user.name, class: "media-object"),
               @user.profile_url, target: '_blank', class: 'pull-left' %></span>

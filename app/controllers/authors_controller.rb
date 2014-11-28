@@ -9,12 +9,15 @@ class AuthorsController < ApplicationController
 
   def show
     @author = Author.find(params[:id])
-    @inbox = current_author.mailbox.inbox
+    @inbox = current_author.mailbox.inbox.paginate(page: params[:inbox_page], per_page: 2)
+    @conversations = current_author.mailbox.conversations.paginate(page: params[:conversations_page], per_page: 2)
+    @sent = current_author.mailbox.sentbox.paginate(page: params[:sent_page], per_page: 2)
   end
   
   def inbox
-    @conversation = current_author.mailbox.inbox.find(params[:message])
-    @receipts = @conversation.receipts_for current_author
+    author = Author.find(params[:id])
+    @conversation = author.mailbox.inbox.find(params[:message])
+    @receipts = @conversation.receipts_for author
   end
 
   def new

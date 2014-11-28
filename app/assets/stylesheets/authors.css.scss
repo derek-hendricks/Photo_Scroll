@@ -1,3 +1,28 @@
 // Place all the styles related to the Authors controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+ul.author-activity {
+  margin-top:10px;
+}
+ul.author-activity li {
+  display: inline;
+  padding: 7px;
+  border-radius: 10px;
+  background-color: steelblue;
+  color: #fff;
+  margin: 30px 5px 0px 0px;
+  box-shadow: 2px 1px 3px skyblue;
+}
+ul.author-activity li:last-child {
+  margin-left:5px;
+}
+ul.author-activity li:last-child:hover {
+  box-shadow: 1px 1px 1px #D74B4B;
+}
+ul.author-activity li a {
+ color: #fff; 
+}
+ul.author-activity li a:hover {
+ text-decoration:none;
+ background: none;
+}

@@ -19,17 +19,13 @@ class Author < ActiveRecord::Base
   has_many :follow_authors, :class_name => "AuthorFollow", :foreign_key => :follow_id 
   has_many :followers, :through => :follow_authors, :source => :author 
 
-  
+
   def name
-    return "email test"
+    return downcase_email
   end
   
   def mailboxer_email(object)
-  #Check if an email should be sent for that object
-  #if true
     return downcase_email
-  #if false
-  #return nil
   end
   
   def followed_messages 
