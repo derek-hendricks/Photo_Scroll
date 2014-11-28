@@ -8,13 +8,14 @@
         <%= render 'comments/form' %>
       </section>
       <section>
-        <h2>Author's you're following:</h2>
+        <h2><%= @author.username %> is following:</h2>
         <%= will_paginate @following %>
         <% @following.in_groups_of(4, false).each do |group| if @following %>
           <div class='row'>
             <% group.each do |author| %>
               <div class='col-md-3'>
-                <%= gravatar_for author, size: 50, :class => "img-gravatar" %>
+                <%= author.username %>
+                <%= link_to (gravatar_for author, size: 50, :class => "img-gravatar"), username_path(author.username) %>
               </div>
             <% end %>
           </div>
