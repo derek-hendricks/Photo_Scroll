@@ -5,12 +5,14 @@ class StaticPagesController < ApplicationController
       @author = params[:username] ? Author.find_by(username: params[:username]) : @author 
       if @author
         @user = params[:username] ? Author.find_by(username: params[:username]).authors_users[0] : current_user 
-        @comment  = @user.comments.build
-        @feed_items = @user.feed
+        if @user 
+          @comment  = @user.comments.build
+          @feed_items = @user.feed
+        end
         @messages = @author.followed_messages.all
         @following = @author.follows.paginate(:page => params[:page], :per_page => 12)
       else 
-      redirect_to home_url, :alert => "Sorry, but #{params[:username]} either doesn't exist or hasn't set up a home page yet"
+      redirect_to home_url, :alert => "Sorry, but the user either doesn't exist or hasn't set up a home page yet"
       end
     end
   end

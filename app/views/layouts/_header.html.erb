@@ -1,7 +1,7 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
     <nav>
-       <%= link_to "Photo Scroll", home_path, id: "logo", style: "margin-top: .55%;" %>
+       <%= link_to "Photo Scroll", home_path, id: "logo", class: "thelogo", style: "margin-top: .55%;" %>
       <ul class="nav navbar-nav pull-right">
         <% if current_user %>
           <li><%= image_tag current_user.avatar_url, style:"height:4.15em;" %></li>

@@ -8,6 +8,7 @@
         <%= render 'comments/form' %>
       </section>
       <section>
+        <h2>Author's you're following:</h2>
         <%= will_paginate @following %>
         <% @following.in_groups_of(4, false).each do |group| if @following %>
           <div class='row'>
@@ -23,16 +24,14 @@
     </aside>
      <div class="col-md-8">
         <h3>Comment Feed</h3>
-      <%= render 'shared/feed' %>
+        <% if @user %>
+          <%= render 'shared/feed'%>
+        <% end %>
     </div>
   </div>
 <% else %>
   <div class="center jumbotron">
-    <h1>Welcome</h1>
 
-    <h2>
-      This is the home page for Photo Scroll
-    </h2>
 
     <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
   </div>
