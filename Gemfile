@@ -24,6 +24,7 @@ gem 'fog',                     '1.23.0'
 gem 'betterlorem', '~> 0.1.2'
 gem 'mailboxer'
 gem 'simple_form'
+gem 'prawn'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 

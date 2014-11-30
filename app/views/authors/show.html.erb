@@ -22,6 +22,7 @@
         From <%= link_to(message.originator.username, username_path(:username => message.originator.username)) %> | 
         sent at: <%= message.created_at %>
       </p>
+      <p><%= link_to "Download PDF", inbox_author_path(:id => @author, :message => message.id, :format => 'pdf') %></p>
     <% end %>
     <%= will_paginate @inbox, :param_name => 'inbox_page' %>
     <%= link_to "New Message", new_conversation_path, class: "btn btn-primary mail" %>

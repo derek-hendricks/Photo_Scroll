@@ -22,6 +22,15 @@ class AuthorsController < ApplicationController
     author = Author.find(params[:id])
     @conversation = author.mailbox.inbox.find(params[:message])
     @receipts = @conversation.receipts_for author
+    
+   respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = InboxPdf.new(@receipts,@conversation)
+        send_data pdf.render, filename: 'inbox.pdf', type: 'application/pdf'
+      end
+    end
+ 
   end
 
   def new

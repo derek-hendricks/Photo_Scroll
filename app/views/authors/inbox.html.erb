@@ -1,10 +1,11 @@
-Conversation with: <%= @conversation.originator.username %><br/>
-Sent On: <%= @conversation.created_at %> <br/>
+Messages From: <%= @conversation.originator.username %> | <%= @conversation.originator.email %> <br/>
+Sent On: <%= @conversation.created_at.to_formatted_s(:long) %> <br/>
 
 <% @receipts.each do |receipt| %> 
   Status: <%= receipt.is_unread? ? "read" : "unread" %><br/>
+  <% author = Author.find(receipt.receiver_id) %>
   <% message = receipt.message %>
-  Subject: <%= message.subject %><br/>
+  Subject: <%= message.subject %> Sent to: <%= author.email %><br/>
   Contents:<br/>
   <%= message.body %>
 <% end %>
