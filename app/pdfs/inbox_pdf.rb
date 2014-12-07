@@ -1,3 +1,5 @@
+require 'prawn/table'
+
 class InboxPdf < Prawn::Document
   def initialize(receipts, conversation)
     super()
